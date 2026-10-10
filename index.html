@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsApp PWA - Inicio</title>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] Metaetiquetas de Configuración y PWA        -->
+  <!-- ======================================================== -->
+  <meta name="description" content="Portal de noticias en tiempo real con Mediastack API y soporte PWA">
+  <meta name="theme-color" content="#1a365d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NewsApp">
+
+  <!-- Enlace al Web App Manifest con los iconos solicitados -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/noticias-192.png">
+  <link rel="icon" type="image/png" href="./icons/noticias-192.png">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos del App Shell -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] ENCABEZADO (HEADER)                          -->
+  <!-- ======================================================== -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon"><i class="fa-solid fa-newspaper"></i></span>
+        <h1 class="brand-title">NewsApp <span class="badge-pwa">PWA</span></h1>
+      </div>
+      <div class="header-actions">
+        <!-- Botón para solicitar / gestionar Notificaciones Nativas -->
+        <button id="btn-notify" class="btn btn-notify" title="Activar notificaciones">
+          <span class="icon"><i class="fa-solid fa-bell"></i></span>
+          <span class="btn-text">Notificaciones</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] MENÚ DE NAVEGACIÓN ENTRE ARCHIVOS           -->
+  <!-- Navegación que enlaza a diferentes secciones/archivos    -->
+  <!-- ======================================================== -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="./index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Inicio</a>
+      <a href="./secciones/api.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Noticias (API)</a>
+    </div>
+  </nav>
+
+  <!-- Banner de estado de conexión (Online / Offline) -->
+  <div id="offline-banner" class="offline-banner hidden">
+    <i class="fa-solid fa-triangle-exclamation"></i> Estás navegando en modo sin conexión (Offline). Mostrando recursos en caché.
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- [ÁREA PRINCIPAL - APP SHELL]                             -->
+  <!-- Contenido principal de la página de inicio              -->
+  <!-- ======================================================== -->
+  <main class="app-main">
+    <!-- Hero / Bienvenida -->
+    <section class="hero-card">
+      <h2>Bienvenido a NewsApp PWA</h2>
+      <p>
+      </p>
+      <div class="hero-actions">
+        <a href="./secciones/api.html" class="btn btn-primary-cta">
+          Ver Noticias en Vivo (API) <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sección de tarjetas informativas de la PWA -->
+    <section class="modules-grid">
+      <article class="module-card">
+        <div class="module-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+        <h3>Consumo de API Mediastack</h3>
+        <p>
+          Las noticias en tiempo real se cargan dinámicamente en el módulo dedicado <code>secciones/api.html</code>.
+        </p>
+        <a href="./secciones/api.html" class="card-link">Ir a la sección de API <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="module-card">
+        <div class="module-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>Arquitectura App Shell</h3>
+        <p>
+          Estructura estática instantánea precacheada en el Service Worker con estrategia <em>Cache First</em>.
+        </p>
+        <span class="status-tag ok"><i class="fa-solid fa-circle-check"></i> Cache First Activo</span>
+      </article>
+
+      <article class="module-card">
+        <div class="module-icon"><i class="fa-solid fa-bell"></i></div>
+        <h3>Notificaciones Nativas</h3>
+        <p>
+          Alertas emitidas por el sistema operativo al refrescar noticias o solicitar permisos al usuario.
+        </p>
+        <button class="btn btn-secondary-sm" onclick="requestNotificationPermission()"><i class="fa-solid fa-bell"></i> Probar Notificación</button>
+      </article>
+    </section>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] PIE DE PÁGINA (FOOTER)                       -->
+  <!-- ======================================================== -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 NewsApp PWA - IDGS 104. Desarrollado con JavaScript Moderno.</p>
+      <p class="api-attribution">
+        Datos provistos por <a href="https://mediastack.com/" target="_blank" rel="noopener noreferrer">Mediastack API</a>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Script principal del cliente -->
+  <script src="./app.js"></script>
+</body>
+</html>
