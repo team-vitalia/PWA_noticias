@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsApp PWA - Noticias en Vivo (API)</title>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] Metaetiquetas de Configuración y PWA        -->
+  <!-- ======================================================== -->
+  <meta name="description" content="Sección de noticias en tiempo real con Mediastack API y PWA">
+  <meta name="theme-color" content="#1a365d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NewsApp">
+
+  <!-- Enlace al Web App Manifest con rutas relativas a la subcarpeta -->
+  <link rel="manifest" href="../manifest.json">
+  <link rel="apple-touch-icon" href="../icons/noticias-192.png">
+  <link rel="icon" type="image/png" href="../icons/noticias-192.png">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos del App Shell -->
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] ENCABEZADO (HEADER)                          -->
+  <!-- ======================================================== -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon"><i class="fa-solid fa-newspaper"></i></span>
+        <h1 class="brand-title">NewsApp <span class="badge-pwa">PWA</span></h1>
+      </div>
+      <div class="header-actions">
+        <!-- Botón para solicitar / gestionar Notificaciones Nativas -->
+        <button id="btn-notify" class="btn btn-notify" title="Activar notificaciones">
+          <span class="icon"><i class="fa-solid fa-bell"></i></span>
+          <span class="btn-text">Notificaciones</span>
+        </button>
+        <!-- Botón para refrescar contenido -->
+        <button id="btn-refresh" class="btn btn-secondary" title="Actualizar noticias">
+          <span class="icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] MENÚ DE NAVEGACIÓN ENTRE ARCHIVOS           -->
+  <!-- Menú principal que apunta a los distintos archivos       -->
+  <!-- ======================================================== -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+      <a href="./api.html" class="nav-link active"><i class="fa-solid fa-newspaper"></i> Noticias (API)</a>
+    </div>
+  </nav>
+
+  <!-- Sub-barra de navegación para filtrar categorías de la API -->
+  <div class="category-bar">
+    <div class="category-container">
+      <button class="nav-pill active" data-category="general">General</button>
+      <button class="nav-pill" data-category="business">Negocios</button>
+      <button class="nav-pill" data-category="technology">Tecnología</button>
+      <button class="nav-pill" data-category="sports">Deportes</button>
+      <button class="nav-pill" data-category="entertainment">Entretenimiento</button>
+      <button class="nav-pill" data-category="science">Ciencia</button>
+    </div>
+  </div>
+
+  <!-- Indicador de estado de conexión (Online / Offline) -->
+  <div id="offline-banner" class="offline-banner hidden">
+    <i class="fa-solid fa-triangle-exclamation"></i> Estás navegando en modo sin conexión (Offline). Mostrando recursos en caché.
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- [ÁREA PRINCIPAL - DINÁMICA] (MAIN CONTENT AREA)          -->
+  <!-- El contenedor pertenece al App Shell y su contenido      -->
+  <!-- se inyecta dinámicamente mediante la API de Mediastack   -->
+  <!-- ======================================================== -->
+  <main class="app-main">
+    <section class="content-header">
+      <h2 id="section-title">Últimas Noticias (Mediastack API)</h2>
+      <span id="news-count" class="news-count">Cargando...</span>
+    </section>
+
+    <!-- INICIO: ÁREA DINÁMICA (Inyección de noticias vía JavaScript) -->
+    <div id="news-container" class="news-grid">
+      <!-- Estado de Carga (Spinner / Skeleton del App Shell) -->
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Consultando la API de Mediastack en vivo...</p>
+      </div>
+      <!-- Aquí app.js insertará los artículos dinámicamente -->
+    </div>
+    <!-- FIN: ÁREA DINÁMICA -->
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- [APP SHELL] PIE DE PÁGINA (FOOTER)                       -->
+  <!-- ======================================================== -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 NewsApp PWA - IDGS 104. Desarrollado con JavaScript Moderno.</p>
+      <p class="api-attribution">
+        Datos provistos por <a href="https://mediastack.com/" target="_blank" rel="noopener noreferrer">Mediastack API</a>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Script principal del cliente -->
+  <script src="../app.js"></script>
+</body>
+</html>
