@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Noticias y tendencias tecnológicas de Medio Oriente: inteligencia artificial, centros de datos, automatización y conectividad.">
+    <title>TechMENA | Noticias Tecnológicas</title>
+    
+<link rel="stylesheet" href="tecnologia.css">
+<script src="tecnologia.js" defer></script>
+
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-icon">🌐</span>
+            <span>Tech<span class="accent">MENA</span>
+                <small>Noticias tecnológicas de Medio Oriente</small>
+            </span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+        <nav class="nav" id="nav">
+            <a href="#inicio">Inicio</a>
+            <a href="#noticias">Noticias</a>
+            <a href="#tendencias">Tendencias</a>
+            <a href="#paises">Países</a>
+        </nav>
+
+        <div class="header-actions">
+            <input type="search" id="searchInput"
+                   placeholder="Buscar noticias..."
+                   aria-label="Buscar noticias">
+            <button id="themeToggle" class="theme-button"
+                    aria-label="Cambiar tema">☾</button>
+        </div>
+    </header>
+
+    <main class="container" id="inicio">
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="eyebrow">TECNOLOGÍA INTERNACIONAL</span>
+                <h1>El futuro tecnológico de Medio Oriente</h1>
+                <p>
+                    Inversiones, inteligencia artificial, infraestructura
+                    digital y tendencias que transforman la región.
+                </p>
+                <a href="#noticias" class="btn">Explorar noticias →</a>
+            </div>
+        </section>
+
+        <section class="trends" id="tendencias">
+            <h2>📈 Tendencias clave</h2>
+
+            <div class="trend-grid">
+                <article class="trend-card">
+                    <span>🏭</span>
+                    <div>
+                        <h3>Infraestructura de datos e IA</h3>
+                        <p>Inversiones y nuevos centros de datos.</p>
+                    </div>
+                </article>
+
+                <article class="trend-card">
+                    <span>💻</span>
+                    <div>
+                        <h3>Edge AI y automatización</h3>
+                        <p>Procesamiento local y en tiempo real.</p>
+                    </div>
+                </article>
+
+                <article class="trend-card">
+                    <span>🤖</span>
+                    <div>
+                        <h3>Physical AI y robótica</h3>
+                        <p>Sistemas autónomos y logística inteligente.</p>
+                    </div>
+                </article>
+
+                <article class="trend-card">
+                    <span>🛡️</span>
+                    <div>
+                        <h3>Soberanía tecnológica</h3>
+                        <p>Talento local y desarrollo de software.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="news-section" id="noticias">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">ACTUALIDAD DIGITAL</span>
+                    <h2>Últimas noticias</h2>
+                </div>
+
+                <span class="news-count" id="newsCount"></span>
+            </div>
+
+            <div class="filters" aria-label="Filtrar noticias">
+                <button class="filter-btn active" data-category="Todas">
+                    Todas
+                </button>
+                <button class="filter-btn" data-category="Inversión">
+                    Inversión
+                </button>
+                <button class="filter-btn" data-category="Inteligencia artificial">
+                    Inteligencia artificial
+                </button>
+                <button class="filter-btn" data-category="Infraestructura">
+                    Infraestructura
+                </button>
+                <button class="filter-btn" data-category="Automatización">
+                    Automatización
+                </button>
+                <button class="filter-btn" data-category="Conectividad">
+                    Conectividad
+                </button>
+            </div>
+
+            <div class="news-grid" id="newsGrid">
+
+                <article class="news-card"
+                    data-category="Inversión"
+                    data-search="Microsoft diez mil millones dólares Golfo nube Arabia Saudita Emiratos Qatar Kuwait">
+                    <div class="news-visual visual-microsoft">
+                        <span class="category">Inversión</span>
+                        <span class="visual-icon">☁️</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">23 septiembre 2026</span>
+                        <h3>Microsoft y la inversión tecnológica en los Estados del Golfo</h3>
+                        <p>
+                            La información proporcionada señala un plan de
+                            inversión de 10,000 millones de dólares hasta 2030,
+                            enfocado en infraestructura de nube y resiliencia digital.
+                        </p>
+                        <a class="source-link"
+                           href="https://blogs.microsoft.com/on-the-issues/2026/09/23/microsoft-strengthens-its-commitment-to-the-middle-east-by-investing-in-technology-digital-resilience-and-people/"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card"
+                    data-category="Inteligencia artificial"
+                    data-search="Stargate UAE G42 Abu Dabi Nvidia OpenAI centros datos subterráneos">
+                    <div class="news-visual visual-stargate">
+                        <span class="category">Inteligencia artificial</span>
+                        <span class="visual-icon">🧠</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">11 septiembre 2026</span>
+                        <h3>Stargate UAE: cambios en el proyecto de IA de G42</h3>
+                        <p>
+                            El reporte citado describe ajustes en la estrategia
+                            de infraestructura de IA de Emiratos Árabes Unidos
+                            ante riesgos para los centros de datos.
+                        </p>
+                        <a class="source-link"
+                           href="https://www.reuters.com/world/middle-east/uae-revises-ai-data-center-plan-after-iranian-attacks-sources-say-2026-09-11/"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card"
+                    data-category="Infraestructura"
+                    data-search="Irak cinco centros datos estatales Bagdad Basora Mosul">
+                    <div class="news-visual visual-iraq">
+                        <span class="category">Infraestructura</span>
+                        <span class="visual-icon">🏢</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">Septiembre 2026</span>
+                        <h3>Irak proyecta cinco centros de datos estatales</h3>
+                        <p>
+                            Los planes descritos contemplan instalaciones en
+                            Bagdad, Basora y Mosul para reforzar la capacidad
+                            tecnológica del país.
+                        </p>
+                        <a class="source-link"
+                           href="https://www.datacenterdynamics.com/en/news/?term=middle-east"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card"
+                    data-category="Inversión"
+                    data-search="Egipto inversión 270 millones dólares Kemet Data Center">
+                    <div class="news-visual visual-egypt">
+                        <span class="category">Inversión</span>
+                        <span class="visual-icon">🌐</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">Septiembre 2026</span>
+                        <h3>Egipto impulsa el proyecto Kemet Data Center</h3>
+                        <p>
+                            La información compartida menciona una inversión
+                            de 270 millones de dólares para ampliar la
+                            infraestructura digital egipcia.
+                        </p>
+                        <a class="source-link"
+                           href="https://www.datacenterdynamics.com/en/news/?term=middle-east"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card"
+                    data-category="Automatización"
+                    data-search="Lenovo MemryX Arabia Saudita Edge AI sensores procesamiento local">
+                    <div class="news-visual visual-edge">
+                        <span class="category">Automatización</span>
+                        <span class="visual-icon">⚙️</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">Agosto 2026</span>
+                        <h3>Lenovo y MemryX: inteligencia artificial en el borde</h3>
+                        <p>
+                            La tecnología Edge AI permite procesar información
+                            cerca de donde se genera, reduciendo la dependencia
+                            de servidores remotos.
+                        </p>
+                        <a class="source-link"
+                           href="https://www.datacenterdynamics.com/en/news/?term=middle-east"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card"
+                    data-category="Conectividad"
+                    data-search="Medusa Coral Bridge cable submarino fibra óptica Jordania">
+                    <div class="news-visual visual-medusa">
+                        <span class="category">Conectividad</span>
+                        <span class="visual-icon">🔗</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="date">Agosto 2026</span>
+                        <h3>Medusa y Coral Bridge: conectividad regional</h3>
+                        <p>
+                            La expansión descrita busca reforzar las conexiones
+                            de fibra óptica y el intercambio internacional
+                            de datos en Medio Oriente.
+                        </p>
+                        <a class="source-link"
+                           href="https://www.datacenterdynamics.com/en/news/?term=middle-east"
+                           target="_blank" rel="noopener noreferrer">
+                            Consultar fuente ↗
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="empty-message" id="emptyMessage" hidden>
+                No se encontraron noticias con esos criterios.
+            </p>
+        </section>
+
+        <section class="countries" id="paises">
+            <div>
+                <span class="eyebrow">PANORAMA REGIONAL</span>
+                <h2>Países destacados</h2>
+                <p>
+                    Los países mencionados en los proyectos y tendencias
+                    tecnológicas recopilados.
+                </p>
+            </div>
+
+            <div class="country-grid">
+                <div class="country-card"><span>🇸🇦</span>Arabia Saudita</div>
+                <div class="country-card"><span>🇦🇪</span>Emiratos Árabes Unidos</div>
+                <div class="country-card"><span>🇶🇦</span>Qatar</div>
+                <div class="country-card"><span>🇰🇼</span>Kuwait</div>
+                <div class="country-card"><span>🇮🇶</span>Irak</div>
+                <div class="country-card"><span>🇪🇬</span>Egipto</div>
+                <div class="country-card"><span>🇯🇴</span>Jordania</div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div>
+                <span class="eyebrow">BOLETÍN TECNOLÓGICO</span>
+                <h2>Mantente informado</h2>
+                <p>
+                    Recibe las últimas novedades sobre innovación y
+                    transformación digital.
+                </p>
+            </div>
+
+            <form id="newsletterForm" class="newsletter-form">
+                <label for="emailInput">Correo electrónico</label>
+                <div class="email-row">
+                    <input type="email" id="emailInput"
+                           placeholder="tucorreo@ejemplo.com" required>
+                    <button class="btn" type="submit">Suscribirme</button>
+                </div>
+                <p id="formMessage" role="status"></p>
+            </form>
+        </section>
+
+        <p class="disclaimer">
+            Nota editorial: las noticias se basan en la información
+            recopilada y los enlaces proporcionados. Verifica los datos,
+            fechas y anuncios en las fuentes originales antes de publicarlos
+            como información confirmada.
+        </p>
+
+    </main>
+
+    <footer class="footer">
+        <a href="#inicio" class="footer-logo">Tech<span>MENA</span></a>
+        <p>© 2026 TechMENA. Noticias y tendencias tecnológicas.</p>
+        <a href="#noticias">Volver a las noticias ↑</a>
+    </footer>
+
+</body>
+</html>
