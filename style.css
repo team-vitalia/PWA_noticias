@@ -1,0 +1,95 @@
+/* Estilos del App Shell: estructura y apariencia persistentes */
+:root {
+  --theme: #2196f3;
+  --theme-dark: #1769aa;
+  --background: #f3f7fb;
+  --text: #1f2937;
+  --muted: #5b6777;
+  --border: #d7e2ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--background);
+}
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px max(5vw, 20px);
+  color: #fff;
+  background: var(--theme);
+}
+.logo {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #0002;
+}
+h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); }
+.subtitle { margin: 7px 0 0; color: #eef7ff; }
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.nav-btn {
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.nav-btn:hover { background: #eaf4fd; }
+.nav-btn.active {
+  color: #fff;
+  background: var(--theme);
+}
+.app-content {
+  width: min(100% - 32px, 900px);
+  margin: 28px auto;
+  flex: 1;
+}
+.card {
+  padding: clamp(20px, 4vw, 34px);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 5px 18px #17324d0b;
+  line-height: 1.65;
+}
+.card h2 { margin-top: 0; color: var(--theme-dark); }
+.note {
+  margin-top: 22px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--theme);
+  background: #eef7ff;
+  border-radius: 4px;
+}
+.app-footer {
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  background: #263746;
+}
+.app-footer p { margin: 4px 0; }
+.footer-small { color: #d5e1ec; font-size: .9rem; }
+[hidden] { display: none !important; }
+@media (max-width: 520px) {
+  .app-header { padding: 18px; gap: 12px; }
+  .logo { width: 54px; height: 54px; }
+  .subtitle { font-size: .9rem; }
+  .app-nav { gap: 4px; padding: 10px 6px; }
+  .nav-btn { flex: 1; padding: 10px 6px; font-size: .9rem; }
+  .app-content { width: calc(100% - 24px); margin: 18px auto; }
+}
