@@ -3,184 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#003366">
-    <title>Economía | Sistema de Noticias PWA</title>
+    <meta name="theme-color" content="#7b1e26">
+    <title>Economía | Sistema de Noticias</title>
     <link rel="stylesheet" href="economia.css">
     <link rel="icon" href="../../icons/icon-192.png">
 </head>
 <body>
 
-    <!-- ==================== APP SHELL ==================== -->
+    <!-- ============ HEADER ============ -->
     <header class="app-header">
-        <div class="header-content">
-            <a href="../../index.html" class="btn-back">← Inicio</a>
-            <div>
-                <h1>💰 Economía</h1>
-                <p class="subtitle">Sistema de Noticias PWA</p>
+        <div class="top-bar">
+            <span>📅 Viernes, 10 de octubre de 2024</span>
+            <div class="top-bar-links">
+                <a href="../../index.html">Inicio</a>
+                <a href="../finanzas/finanzas.html">Finanzas</a>
+                <a href="../comercio/comercio.html">Comercio</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-brand">
+                <a href="../../index.html" class="btn-back">← Volver</a>
+                <div class="brand-titles">
+                    <h1>💰 Economía</h1>
+                    <p class="subtitle">Análisis y actualidad económica</p>
+                </div>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="buscador" placeholder="Buscar noticias de economía...">
             </div>
         </div>
     </header>
-    <!-- ==================== FIN APP SHELL ==================== -->
 
-    <!-- ==================== CONTENIDO DINÁMICO ==================== -->
+    <!-- ============ CONTENIDO ============ -->
     <main class="app-content">
 
-        <section class="intro">
-            <h2>Panorama Económico</h2>
-            <p>
-                La economía mexicana atraviesa un periodo clave marcado por la estabilización
-                de la inflación, un tipo de cambio competitivo y un crecimiento moderado
-                impulsado por el consumo interno, la inversión extranjera y el fenómeno del
-                nearshoring.
-            </p>
+        <!-- Noticia destacada -->
+        <article class="headline-news" data-titulo="economia mexicana crece">
+            <div class="headline-visual">
+                <span class="headline-badge">Última hora</span>
+                <span class="headline-emoji">📈</span>
+            </div>
+            <div class="headline-body">
+                <span class="headline-cat">Macroeconomía</span>
+                <h2>La economía mexicana crece 1.8% impulsada por el consumo interno</h2>
+                <p class="headline-lead">
+                    El INEGI reportó un crecimiento del PIB superior a las expectativas de los
+                    analistas, impulsado principalmente por el sector servicios, la inversión
+                    extranjera directa y el fenómeno del nearshoring que sigue atrayendo
+                    capital a la región norte del país.
+                </p>
+                <div class="headline-meta">
+                    <span>Por Sebas Rodríguez</span>
+                    <span>10 oct 2024</span>
+                    <span>5 min lectura</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Indicadores con gráficas -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Indicadores clave</h2>
+                <span class="section-line"></span>
+            </div>
+
+            <div class="indicadores-grid">
+                <div class="indicador-card">
+                    <span class="ind-icon">📈</span>
+                    <span class="ind-label">PIB</span>
+                    <span class="ind-value">+1.8%</span>
+                    <span class="ind-period">Crecimiento anual</span>
+                    <div class="ind-chart" id="chart-pib"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">💸</span>
+                    <span class="ind-label">Inflación</span>
+                    <span class="ind-value">4.5%</span>
+                    <span class="ind-period">Anual</span>
+                    <div class="ind-chart" id="chart-inflacion"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">💵</span>
+                    <span class="ind-label">Tipo de cambio</span>
+                    <span class="ind-value">$17.85</span>
+                    <span class="ind-period">MXN/USD</span>
+                    <div class="ind-chart" id="chart-dolar"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">🏦</span>
+                    <span class="ind-label">Tasa Banxico</span>
+                    <span class="ind-value">10.25%</span>
+                    <span class="ind-period">Tasa objetivo</span>
+                    <div class="ind-chart" id="chart-tasa"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- INDICADORES CLAVE -->
-        <section class="indicadores-grid">
-            <div class="indicador-card">
-                <span class="icono">📈</span>
-                <span class="nombre">PIB</span>
-                <span class="valor">+1.8%</span>
-                <span class="periodo">Crecimiento anual</span>
+        <!-- Noticias grid -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Últimas noticias</h2>
+                <span class="section-line"></span>
             </div>
 
-            <div class="indicador-card">
-                <span class="icono">💸</span>
-                <span class="nombre">Inflación</span>
-                <span class="valor">4.5%</span>
-                <span class="periodo">Anual</span>
+            <div class="news-grid">
+                <article class="news-card" data-titulo="bolsa mexicana cierra con ganancias">
+                    <div class="news-visual"><span>📊</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Mercados</span>
+                        <h3>La Bolsa Mexicana cierra con ganancias del 1.2%</h3>
+                        <p>El índice IPC registró su mejor jornada de la semana impulsado por el sector financiero y las empresas de consumo.</p>
+                        <span class="news-date">10 oct 2024 · 4 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="inflacion se mantiene estable">
+                    <div class="news-visual"><span>💸</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Inflación</span>
+                        <h3>Inflación se mantiene estable en 4.5% anual</h3>
+                        <p>El INEGI reportó que el índice de precios al consumidor no presentó variaciones significativas durante el mes.</p>
+                        <span class="news-date">9 oct 2024 · 3 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="peso mexicano se aprecia">
+                    <div class="news-visual"><span>💵</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Divisas</span>
+                        <h3>El peso mexicano se aprecia frente al dólar</h3>
+                        <p>La moneda nacional cerró en 17.85 pesos por dólar, su mejor nivel en tres meses, favorecida por el diferencial de tasas.</p>
+                        <span class="news-date">8 oct 2024 · 5 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="empleo formal maximo historico">
+                    <div class="news-visual"><span>👷</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Empleo</span>
+                        <h3>Empleo formal alcanza máximo histórico</h3>
+                        <p>El IMSS registró más de 22.5 millones de trabajadores asegurados, la cifra más alta desde que se tiene registro.</p>
+                        <span class="news-date">7 oct 2024 · 4 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="nearshoring inversion extranjera">
+                    <div class="news-visual"><span>🏭</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Inversión</span>
+                        <h3>Nearshoring impulsa inversión extranjera directa</h3>
+                        <p>México captó 36 mil millones de dólares en inversión extranjera directa durante el año, con un crecimiento del 12%.</p>
+                        <span class="news-date">6 oct 2024 · 6 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="exportaciones mexicanas record">
+                    <div class="news-visual"><span>📦</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Comercio</span>
+                        <h3>Exportaciones mexicanas alcanzan récord histórico</h3>
+                        <p>Las exportaciones manufactureras superaron los 55 mil millones de dólares en el último trimestre.</p>
+                        <span class="news-date">5 oct 2024 · 4 min</span>
+                    </div>
+                </article>
             </div>
 
-            <div class="indicador-card">
-                <span class="icono">💵</span>
-                <span class="nombre">Tipo de cambio</span>
-                <span class="valor">$17.85</span>
-                <span class="periodo">MXN/USD</span>
-            </div>
-
-            <div class="indicador-card">
-                <span class="icono">🏦</span>
-                <span class="nombre">Tasa interés</span>
-                <span class="valor">10.25%</span>
-                <span class="periodo">Banxico</span>
+            <!-- Mensaje sin resultados -->
+            <div class="no-results" id="noResultsEco" style="display:none;">
+                <span>🔍</span>
+                <p>No se encontraron noticias con ese término.</p>
             </div>
         </section>
 
-        <!-- NOTICIAS -->
-        <section class="noticias-section">
-            <h2>📰 Noticias Recientes</h2>
-
-            <article class="noticia-card">
-                <span class="categoria">Mercados</span>
-                <h3>La Bolsa Mexicana cierra con ganancias del 1.2%</h3>
-                <span class="fecha">10 de octubre, 2024</span>
-                <p>
-                    El índice IPC registró su mejor jornada de la semana impulsado por el
-                    sector financiero y las empresas de consumo. Los inversionistas
-                    reaccionaron positivamente a los datos de inflación en Estados Unidos.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Inflación</span>
-                <h3>Inflación se mantiene estable en 4.5% anual</h3>
-                <span class="fecha">9 de octubre, 2024</span>
-                <p>
-                    El INEGI reportó que el índice de precios al consumidor no presentó
-                    variaciones significativas durante el mes, manteniéndose dentro del
-                    rango esperado por los analistas económicos.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Divisas</span>
-                <h3>El peso mexicano se aprecia frente al dólar</h3>
-                <span class="fecha">8 de octubre, 2024</span>
-                <p>
-                    La moneda nacional cerró en 17.85 pesos por dólar, su mejor nivel en
-                    tres meses, favorecida por el diferencial de tasas entre Banxico y
-                    la Reserva Federal de Estados Unidos.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Empleo</span>
-                <h3>Empleo formal alcanza máximo histórico</h3>
-                <span class="fecha">7 de octubre, 2024</span>
-                <p>
-                    El IMSS registró más de 22.5 millones de trabajadores asegurados,
-                    la cifra más alta desde que se tiene registro. El sector servicios
-                    concentró el mayor número de nuevas plazas laborales.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Inversión</span>
-                <h3>Nearshoring impulsa inversión extranjera directa</h3>
-                <span class="fecha">6 de octubre, 2024</span>
-                <p>
-                    México captó 36 mil millones de dólares en inversión extranjera directa
-                    durante el año, con un crecimiento del 12% respecto al año anterior,
-                    principalmente en los sectores manufacturero y tecnológico.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Comercio</span>
-                <h3>Exportaciones mexicanas alcanzan récord histórico</h3>
-                <span class="fecha">5 de octubre, 2024</span>
-                <p>
-                    Las exportaciones manufactureras superaron los 55 mil millones de dólares
-                    en el último trimestre, impulsadas por el sector automotriz y electrónico.
-                    México se consolida como principal socio comercial de Estados Unidos.
-                </p>
-            </article>
-        </section>
-
-        <!-- ANÁLISIS -->
-        <section class="analisis-section">
-            <h2>📊 Análisis Económico</h2>
-
-            <div class="analisis-box">
-                <h3>🔮 Perspectivas para el próximo año</h3>
-                <p>
-                    Los analistas proyectan un crecimiento moderado del PIB entre 1.5% y 2.2%,
-                    impulsado por el consumo interno, la inversión en infraestructura y el
-                    dinamismo del sector exportador. El reto principal será mantener la
-                    estabilidad de precios mientras se estimula el crecimiento económico.
-                </p>
+        <!-- Análisis -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Análisis y opinión</h2>
+                <span class="section-line"></span>
             </div>
 
-            <div class="analisis-box">
-                <h3>🏭 El impacto del nearshoring</h3>
-                <p>
-                    El fenómeno del nearshoring representa una oportunidad histórica para
-                    México, con la posibilidad de generar hasta 4 millones de empleos
-                    adicionales en la próxima década. Para aprovecharlo, el país requiere
-                    invertir en infraestructura energética, seguridad jurídica y capital
-                    humano especializado.
-                </p>
-            </div>
+            <div class="analisis-list">
+                <article class="analisis-item">
+                    <div class="analisis-num">01</div>
+                    <div class="analisis-body">
+                        <h3>Perspectivas económicas para el próximo año</h3>
+                        <p>Los analistas proyectan un crecimiento moderado del PIB entre 1.5% y 2.2%, impulsado por el consumo interno y el dinamismo exportador. El reto principal será mantener la estabilidad de precios.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
 
-            <div class="analisis-box">
-                <h3>🏦 Desafíos del sector financiero</h3>
-                <p>
-                    El sistema financiero mexicano enfrenta retos como la digitalización
-                    acelerada, la competencia de las fintech y la necesidad de mayor
-                    inclusión financiera, ya que aún cerca del 30% de la población adulta
-                    no cuenta con una cuenta bancaria.
-                </p>
-            </div>
+                <article class="analisis-item">
+                    <div class="analisis-num">02</div>
+                    <div class="analisis-body">
+                        <h3>El impacto del nearshoring en la economía mexicana</h3>
+                        <p>El fenómeno representa una oportunidad histórica con la posibilidad de generar hasta 4 millones de empleos en la próxima década. Requiere inversión en infraestructura energética y capital humano.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
 
+                <article class="analisis-item">
+                    <div class="analisis-num">03</div>
+                    <div class="analisis-body">
+                        <h3>Desafíos del sector financiero mexicano</h3>
+                        <p>El sistema enfrenta retos como la digitalización acelerada, la competencia fintech y la necesidad de mayor inclusión financiera, ya que el 30% de la población adulta no tiene cuenta bancaria.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
+            </div>
         </section>
 
     </main>
-    <!-- ==================== FIN CONTENIDO DINÁMICO ==================== -->
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- ============ FOOTER ============ -->
     <footer class="app-footer">
-        <p>&copy; 2024 Sistema de Noticias PWA · Sección Economía</p>
-        <p class="footer-small">Desarrollado por Sebas · UTXT</p>
+        <div class="footer-content">
+            <p>&copy; 2024 Sistema de Noticias · Sección Economía</p>
+            <p class="footer-small">Desarrollado por Sebas · UTXT</p>
+        </div>
     </footer>
 
     <script src="economia.js"></script>

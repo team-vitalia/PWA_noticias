@@ -3,178 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#003366">
-    <title>Finanzas | Sistema de Noticias PWA</title>
+    <meta name="theme-color" content="#7b1e26">
+    <title>Finanzas | Sistema de Noticias</title>
     <link rel="stylesheet" href="finanzas.css">
     <link rel="icon" href="../../icons/icon-192.png">
 </head>
 <body>
 
     <header class="app-header">
-        <div class="header-content">
-            <a href="../../index.html" class="btn-back">← Inicio</a>
-            <div>
-                <h1>🏦 Finanzas</h1>
-                <p class="subtitle">Sistema de Noticias PWA</p>
+        <div class="top-bar">
+            <span>📅 Viernes, 10 de octubre de 2024</span>
+            <div class="top-bar-links">
+                <a href="../../index.html">Inicio</a>
+                <a href="../economia/economia.html">Economía</a>
+                <a href="../comercio/comercio.html">Comercio</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-brand">
+                <a href="../../index.html" class="btn-back">← Volver</a>
+                <div class="brand-titles">
+                    <h1>🏦 Finanzas</h1>
+                    <p class="subtitle">Ahorro, inversión y fintech</p>
+                </div>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="buscador" placeholder="Buscar noticias financieras...">
             </div>
         </div>
     </header>
 
     <main class="app-content">
 
-        <section class="intro">
-            <h2>Mundo Financiero</h2>
-            <p>
-                El sector financiero es el motor que mueve la economía: bancos, bolsas de
-                valores, fintech, seguros y sistemas de pago. Aquí encontrarás información
-                clave sobre el ahorro, la inversión, el crédito y las nuevas tendencias
-                digitales que están transformando las finanzas en México y el mundo.
-            </p>
+        <article class="headline-news" data-titulo="banca digital usuarios">
+            <div class="headline-visual">
+                <span class="headline-badge">Destacado</span>
+                <span class="headline-emoji">💳</span>
+            </div>
+            <div class="headline-body">
+                <span class="headline-cat">Banca digital</span>
+                <h2>Banca digital supera los 80 millones de usuarios en México</h2>
+                <p class="headline-lead">
+                    La CNBV reportó un crecimiento del 18% anual en usuarios de banca digital,
+                    impulsado por aplicaciones móviles, fintech y una mayor cultura financiera
+                    entre la población joven del país.
+                </p>
+                <div class="headline-meta">
+                    <span>Por Sebas Rodríguez</span>
+                    <span>10 oct 2024</span>
+                    <span>5 min lectura</span>
+                </div>
+            </div>
+        </article>
+
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Indicadores financieros</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="indicadores-grid">
+                <div class="indicador-card">
+                    <span class="ind-icon">🏛️</span>
+                    <span class="ind-label">CETES 28 días</span>
+                    <span class="ind-value">10.0%</span>
+                    <span class="ind-period">Tasa anual</span>
+                    <div class="ind-chart" id="chart-cetes"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">📊</span>
+                    <span class="ind-label">IPC Bolsa</span>
+                    <span class="ind-value">52,340</span>
+                    <span class="ind-period">Puntos</span>
+                    <div class="ind-chart" id="chart-ipc"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">💳</span>
+                    <span class="ind-label">Tarjeta crédito</span>
+                    <span class="ind-value">38%</span>
+                    <span class="ind-period">Tasa promedio</span>
+                    <div class="ind-chart" id="chart-tarjeta"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">💾</span>
+                    <span class="ind-label">Fintech</span>
+                    <span class="ind-value">+25%</span>
+                    <span class="ind-period">Crecimiento anual</span>
+                    <div class="ind-chart" id="chart-fintech"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- INDICADORES FINANCIEROS -->
-        <section class="indicadores-grid">
-            <div class="indicador-card">
-                <span class="icono">🏛️</span>
-                <span class="nombre">Tasa CETES</span>
-                <span class="valor">10.0%</span>
-                <span class="periodo">28 días</span>
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Últimas noticias</h2>
+                <span class="section-line"></span>
             </div>
+            <div class="news-grid">
+                <article class="news-card" data-titulo="banca digital supera 80 millones usuarios">
+                    <div class="news-visual"><span>🏦</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Banca</span>
+                        <h3>Banca digital supera los 80 millones de usuarios en México</h3>
+                        <p>La CNBV reportó un crecimiento del 18% en usuarios de banca digital impulsados por apps móviles y fintech.</p>
+                        <span class="news-date">10 oct 2024 · 5 min</span>
+                    </div>
+                </article>
 
-            <div class="indicador-card">
-                <span class="icono">📊</span>
-                <span class="nombre">IPC Bolsa</span>
-                <span class="valor">52,340</span>
-                <span class="periodo">Puntos</span>
+                <article class="news-card" data-titulo="cetes rendimiento 10 por ciento">
+                    <div class="news-visual"><span>📈</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Inversión</span>
+                        <h3>CETES mantienen atractivo rendimiento del 10% anual</h3>
+                        <p>Los Certificados de la Tesorería continúan siendo uno de los instrumentos de inversión más atractivos.</p>
+                        <span class="news-date">9 oct 2024 · 4 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="fintech mexicana valuacion">
+                    <div class="news-visual"><span>🚀</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Fintech</span>
+                        <h3>Fintech mexicana alcanza valuación de 5 mil millones de dólares</h3>
+                        <p>Una de las principales plataformas de pagos digitales se consolidó como el segundo unicornio más valioso.</p>
+                        <span class="news-date">8 oct 2024 · 6 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="cartera credito consumo crece">
+                    <div class="news-visual"><span>💳</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Crédito</span>
+                        <h3>Cartera de crédito al consumo crece 12% anual</h3>
+                        <p>Los créditos personales, tarjetas y créditos de nómina mostraron un crecimiento sostenido durante el año.</p>
+                        <span class="news-date">7 oct 2024 · 5 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="ahorro financiero hogares record">
+                    <div class="news-visual"><span>💰</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Ahorro</span>
+                        <h3>Ahorro financiero de los hogares mexicanos alcanza récord</h3>
+                        <p>El ahorro financiero de las familias superó los 3 billones de pesos, impulsado por mayor cultura financiera.</p>
+                        <span class="news-date">6 oct 2024 · 4 min</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-titulo="sector asegurador seguros digitales">
+                    <div class="news-visual"><span>🛡️</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Seguros</span>
+                        <h3>Sector asegurador crece 8% impulsado por seguros digitales</h3>
+                        <p>Las aseguradoras han apostado por la digitalización de sus productos con seguros 100% en línea.</p>
+                        <span class="news-date">5 oct 2024 · 4 min</span>
+                    </div>
+                </article>
             </div>
-
-            <div class="indicador-card">
-                <span class="icono">💳</span>
-                <span class="nombre">Tarjeta crédito</span>
-                <span class="valor">38%</span>
-                <span class="periodo">Tasa promedio</span>
-            </div>
-
-            <div class="indicador-card">
-                <span class="icono">💾</span>
-                <span class="nombre">Fintech</span>
-                <span class="valor">+25%</span>
-                <span class="periodo">Crecimiento anual</span>
+            <div class="no-results" id="noResultsFin" style="display:none;">
+                <span>🔍</span>
+                <p>No se encontraron noticias con ese término.</p>
             </div>
         </section>
 
-        <!-- NOTICIAS FINANCIERAS -->
-        <section class="noticias-section">
-            <h2>📰 Noticias Financieras</h2>
-
-            <article class="noticia-card">
-                <span class="categoria">Banca</span>
-                <h3>Banca digital supera los 80 millones de usuarios en México</h3>
-                <span class="fecha">10 de octubre, 2024</span>
-                <p>
-                    La Comisión Nacional Bancaria y de Valores (CNBV) reportó que los
-                    usuarios de banca digital crecieron 18% respecto al año anterior,
-                    impulsados por las aplicaciones móviles y las nuevas fintech.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Inversión</span>
-                <h3>CETES mantienen atractivo rendimiento del 10% anual</h3>
-                <span class="fecha">9 de octubre, 2024</span>
-                <p>
-                    Los Certificados de la Tesorería de la Federación continúan siendo uno
-                    de los instrumentos de inversión más atractivos para los ahorradores
-                    mexicanos, con rendimientos superiores a la inflación.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Fintech</span>
-                <h3>Fintech mexicana alcanza valuación de 5 mil millones de dólares</h3>
-                <span class="fecha">8 de octubre, 2024</span>
-                <p>
-                    Una de las principales plataformas de pagos digitales del país se
-                    consolidó como el segundo unicornio más valioso de América Latina,
-                    tras una ronda de inversión de 500 millones de dólares.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Crédito</span>
-                <h3>Cartera de crédito al consumo crece 12% anual</h3>
-                <span class="fecha">7 de octubre, 2024</span>
-                <p>
-                    Los créditos personales, tarjetas de crédito y créditos de nómina
-                    mostraron un crecimiento sostenido, reflejando una mayor confianza
-                    de los consumidores y una recuperación del poder adquisitivo.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Ahorro</span>
-                <h3>Ahorro financiero de los hogares mexicanos alcanza récord</h3>
-                <span class="fecha">6 de octubre, 2024</span>
-                <p>
-                    El ahorro financiero de las familias mexicanas superó los 3 billones
-                    de pesos, impulsado por una mayor cultura financiera y el acceso a
-                    instrumentos de inversión digitales.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Seguros</span>
-                <h3>Sector asegurador crece 8% impulsado por seguros digitales</h3>
-                <span class="fecha">5 de octubre, 2024</span>
-                <p>
-                    Las aseguradoras han apostado por la digitalización de sus productos,
-                    ofreciendo seguros de auto, vida y gastos médicos totalmente en línea,
-                    lo que ha ampliado su base de clientes.
-                </p>
-            </article>
-        </section>
-
-        <!-- ANÁLISIS FINANCIERO -->
-        <section class="analisis-section">
-            <h2>📊 Análisis Financiero</h2>
-
-            <div class="analisis-box">
-                <h3>💡 Educación financiera: la clave del bienestar</h3>
-                <p>
-                    La educación financiera es fundamental para que las personas tomen
-                    decisiones informadas sobre su dinero. En México, solo 3 de cada 10
-                    adultos tienen conocimientos financieros básicos, lo que representa
-                    un reto para el desarrollo económico del país.
-                </p>
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Análisis financiero</h2>
+                <span class="section-line"></span>
             </div>
-
-            <div class="analisis-box">
-                <h3>📱 El auge de las fintech en México</h3>
-                <p>
-                    México es el segundo mercado fintech más grande de América Latina,
-                    con más de 500 empresas dedicadas a pagos digitales, préstamos en
-                    línea, inversiones automatizadas y criptomonedas. La Ley Fintech de
-                    2018 fue pionera a nivel mundial.
-                </p>
+            <div class="analisis-list">
+                <article class="analisis-item">
+                    <div class="analisis-num">01</div>
+                    <div class="analisis-body">
+                        <h3>Educación financiera: la clave del bienestar</h3>
+                        <p>En México, solo 3 de cada 10 adultos tienen conocimientos financieros básicos, lo que representa un reto importante para el desarrollo económico del país y la calidad de vida de las familias.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
+                <article class="analisis-item">
+                    <div class="analisis-num">02</div>
+                    <div class="analisis-body">
+                        <h3>El auge de las fintech en México</h3>
+                        <p>México es el segundo mercado fintech más grande de América Latina con más de 500 empresas dedicadas a pagos digitales, préstamos en línea e inversiones automatizadas.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
+                <article class="analisis-item">
+                    <div class="analisis-num">03</div>
+                    <div class="analisis-body">
+                        <h3>Inclusión financiera y bancarización</h3>
+                        <p>Cerca del 30% de los adultos mexicanos aún no tienen una cuenta bancaria. Los programas de inclusión financiera y la banca digital están cerrando esta brecha.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
             </div>
-
-            <div class="analisis-box">
-                <h3>🌐 Inclusión financiera y bancarización</h3>
-                <p>
-                    Cerca del 30% de los adultos mexicanos aún no tienen una cuenta
-                    bancaria. Los programas de inclusión financiera, junto con la banca
-                    digital y las fintech, están cerrando esta brecha, especialmente en
-                    zonas rurales y comunidades marginadas.
-                </p>
-            </div>
-
         </section>
 
     </main>
 
     <footer class="app-footer">
-        <p>&copy; 2024 Sistema de Noticias PWA · Sección Finanzas</p>
-        <p class="footer-small">Desarrollado por Sebas · UTXT</p>
+        <div class="footer-content">
+            <p>&copy; 2024 Sistema de Noticias · Sección Finanzas</p>
+            <p class="footer-small">Desarrollado por Sebas · UTXT</p>
+        </div>
     </footer>
 
     <script src="finanzas.js"></script>
