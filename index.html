@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jugada · Noticias deportivas</title>
+<meta name="description" content="Noticias y resultados deportivos en tiempo real.">
+<meta name="theme-color" content="#1B3BFF">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div id="offline" class="offline" role="status" hidden>Sin conexión. Mostrando contenido guardado.</div>
+
+<header class="bar">
+  <div class="bar-in">
+    <h1 class="logo">Jugada</h1>
+    <div class="bar-actions">
+      <button id="install" class="btn-sm" hidden>Instalar app</button>
+      <button id="refresh" class="icon" aria-label="Actualizar noticias">↻</button>
+      <button id="theme" class="icon" aria-label="Cambiar tema">◐</button>
+    </div>
+  </div>
+  <div class="bar-in">
+    <input id="q" class="search" type="search" placeholder="Buscar equipo, jugador o liga" aria-label="Buscar">
+  </div>
+  <nav id="chips" class="chips" aria-label="Deportes"></nav>
+</header>
+
+<main id="view" class="view" aria-live="polite"></main>
+
+<nav class="tabbar" aria-label="Secciones">
+  <button data-view="news" aria-current="page">Noticias</button>
+  <button data-view="scores">Resultados</button>
+  <button data-view="saved">Guardadas <span id="count" class="badge" hidden>0</span></button>
+</nav>
+
+<dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
+  <article id="sheet-body"></article>
+</dialog>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="/js/app.js" defer></script>
+</body>
+</html>

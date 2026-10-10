@@ -1,0 +1,15 @@
+{
+  "name": "Jugada · Noticias deportivas",
+  "short_name": "Jugada",
+  "description": "Noticias y resultados deportivos.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5F6FA",
+  "theme_color": "#1B3BFF",
+  "lang": "es",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable"}
+  ]
+}
