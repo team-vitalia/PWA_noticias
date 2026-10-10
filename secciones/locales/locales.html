@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35164f">
+  <meta name="description" content="Descubre noticias, cultura y tradiciones de Toluca, con un espacio especial para la Feria del Alfeñique.">
+
+  <title>Noticias Locales | Alfeñique de Toluca</title>
+
+  <!-- Icono de la sección local -->
+  <link rel="icon" type="image/svg+xml" href="./locales-icono.svg">
+
+  <link rel="stylesheet" href="./locales.css">
+  <script src="./locales.js" defer></script>
+</head>
+
+<body class="locales-page">
+
+  <header class="locales-encabezado" id="locales-inicio">
+    <div class="locales-barra-superior">
+      <a class="locales-marca" href="#locales-inicio" aria-label="Inicio de Noticias Locales">
+        <span class="locales-marca-icono" aria-hidden="true">✿</span>
+        <span>RAÍCES <b>LOCALES</b></span>
+      </a>
+      <span class="locales-fecha-edicion">TOLUCA · ESTADO DE MÉXICO</span>
+    </div>
+
+    <div class="locales-portada">
+      <div class="locales-portada-texto">
+        <span class="locales-etiqueta-portada">
+          <span class="locales-punto-vivo"></span>
+          ESPECIAL CULTURAL · DÍA DE MUERTOS
+        </span>
+
+        <h1>El alma de Toluca<br>se viste de <span>alfeñique.</span></h1>
+
+        <p class="locales-subtitulo">
+          Historias, sabores y tradiciones que mantienen viva la esencia
+          de nuestra ciudad.
+        </p>
+
+        <a class="locales-boton-portada" href="#locales-noticias">
+          Descubre las historias <span aria-hidden="true">↗</span>
+        </a>
+
+        <div class="locales-portada-datos">
+          <span>✦ Tradición</span>
+          <span>✦ Cultura</span>
+          <span>✦ Comunidad</span>
+        </div>
+      </div>
+
+      <div class="locales-portada-arte" aria-label="Ilustración decorativa de una calaverita de azúcar">
+        <div class="locales-aro locales-aro-uno"></div>
+        <div class="locales-aro locales-aro-dos"></div>
+        <span class="locales-estrella locales-estrella-uno">✦</span>
+        <span class="locales-estrella locales-estrella-dos">✧</span>
+        <span class="locales-flor locales-flor-uno">✿</span>
+        <span class="locales-flor locales-flor-dos">❋</span>
+
+        <div class="locales-calavera-ilustrada" aria-hidden="true">
+          <div class="locales-calavera-corona">✿ ✦ ✿</div>
+          <div class="locales-calavera-ojos">
+            <span>✿</span><span>✿</span>
+          </div>
+          <div class="locales-calavera-nariz">◆</div>
+          <div class="locales-calavera-boca">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="locales-calavera-mejillas">✿</div>
+        </div>
+
+        <div class="locales-cinta-arte">HECHO CON TRADICIÓN</div>
+      </div>
+    </div>
+
+    <div class="locales-franja">
+      <span>✦</span>
+      <p>Las historias de nuestra comunidad merecen ser contadas.</p>
+      <span>✦</span>
+    </div>
+  </header>
+
+  <nav class="locales-nav" aria-label="Navegación de noticias locales">
+    <a class="locales-nav-activo" href="#locales-inicio">Inicio</a>
+    <a href="#locales-tradicion">Nuestra tradición</a>
+    <a href="#locales-noticias">Noticias</a>
+    <a href="#locales-pie">Acerca de</a>
+  </nav>
+
+  <main class="locales-contenedor">
+
+    <section class="locales-introduccion" id="locales-tradicion">
+      <div class="locales-introduccion-icono" aria-hidden="true">✺</div>
+
+      <div class="locales-introduccion-texto">
+        <p class="locales-ceja">UNA CIUDAD CON HISTORIA</p>
+        <h2>Tradiciones que <span>nos unen.</span></h2>
+        <p>
+          Toluca conserva una de sus expresiones culturales más especiales
+          en la elaboración del alfeñique. Sus figuras de azúcar, calaveritas
+          y dulces tradicionales llenan de color la temporada de Día de
+          Muertos y conectan a distintas generaciones con sus raíces.
+        </p>
+      </div>
+
+      <div class="locales-sello">
+        <span>ORGULLO</span>
+        <strong>TOLUCA</strong>
+        <span>EDOMÉX · MÉXICO</span>
+      </div>
+    </section>
+
+    <section class="locales-panel-noticias" id="locales-noticias">
+      <div class="locales-titulo-seccion">
+        <div>
+          <p class="locales-ceja">EL PULSO DE NUESTRA CIUDAD</p>
+          <h2>Historias <span>locales.</span></h2>
+          <p class="locales-descripcion-seccion">
+            Cultura, artesanías y todo lo que hace especial a Toluca.
+          </p>
+        </div>
+
+        <div class="locales-numero-decorativo" aria-hidden="true">01</div>
+      </div>
+
+      <div class="locales-controles">
+        <label class="locales-buscador-contenedor" for="locales-buscador">
+          <span aria-hidden="true">⌕</span>
+          <input
+            id="locales-buscador"
+            type="search"
+            placeholder="¿Qué quieres descubrir?"
+            autocomplete="off"
+          >
+        </label>
+
+        <label class="locales-filtro-contenedor" for="locales-filtro">
+          <span>Categoría</span>
+          <select id="locales-filtro">
+            <option value="Todas">Todas las categorías</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="locales-resumen">
+        <span id="locales-contador" aria-live="polite">Cargando noticias...</span>
+
+        <button id="locales-destacadas" type="button" aria-pressed="false">
+          <span aria-hidden="true">✦</span> Ver destacadas
+        </button>
+      </div>
+
+      <div
+        class="locales-grid"
+        id="locales-lista"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section class="locales-frase">
+      <div class="locales-frase-adorno" aria-hidden="true">
+        <span>✿</span><span>✦</span><span>✿</span>
+      </div>
+      <p>“Mientras haya memoria, nuestras tradiciones seguirán vivas”.</p>
+      <small>Una celebración de nuestras raíces y de quienes las mantienen vivas.</small>
+    </section>
+
+  </main>
+
+  <footer class="locales-footer" id="locales-pie">
+    <div class="locales-footer-adorno" aria-hidden="true">✿ ✦ ❋ ✦ ✿</div>
+    <p class="locales-footer-titulo">Raíces Locales</p>
+    <p>Historias, cultura y tradiciones de Toluca, Estado de México.</p>
+    <p class="locales-footer-nota">Proyecto académico · Sección de noticias locales</p>
+  </footer>
+
+</body>
+</html>
