@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10243a">
+  <meta name="description" content="Sección de noticias políticas de México: gobierno, Congreso, elecciones y asuntos públicos.">
+  <link rel="icon" type="image/svg+xml" href="./politica-icono.svg">
+  <title>Política | Panorama Nacional</title>
+  <link rel="stylesheet" href="./politica.css">
+  <script src="./politica.js" defer></script>
+</head>
+<body class="politica-page">
+
+  <div class="politica-franja">
+    INFORMACIÓN · ANÁLISIS · ACTUALIDAD
+  </div>
+
+  <header class="politica-header" id="politica-inicio">
+    <div class="politica-marca">
+      <div class="politica-logotipo">
+        <span class="politica-logo-icono" aria-hidden="true">P</span>
+        <div>
+          <h1>PANORAMA</h1>
+          <span>ACTUALIDAD POLÍTICA</span>
+        </div>
+      </div>
+      <a
+        class="politica-enlace-milenio"
+        href="https://www.milenio.com/politica"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Política en Milenio ↗
+      </a>
+    </div>
+
+    <nav class="politica-nav" aria-label="Navegación política">
+      <a href="#politica-inicio">Inicio</a>
+      <a href="#politica-noticias">Noticias</a>
+      <a href="#politica-temas">Temas de interés</a>
+      <a href="#politica-fuentes">Fuentes</a>
+    </nav>
+  </header>
+
+  <main class="politica-contenedor">
+
+    <section class="politica-portada">
+      <div class="politica-portada-texto">
+        <span class="politica-etiqueta">EL PANORAMA NACIONAL</span>
+        <h2>Las decisiones que mueven al país.</h2>
+        <p>
+          Sigue la actualidad política de México, conoce los temas
+          del debate público y consulta fuentes informativas para
+          comprender lo que sucede en el país.
+        </p>
+        <a href="#politica-noticias" class="politica-boton">
+          Explorar información <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="politica-portada-grafico" aria-hidden="true">
+        <div class="politica-circulo politica-circulo-uno"></div>
+        <div class="politica-circulo politica-circulo-dos"></div>
+        <div class="politica-edificio">
+          <div class="politica-edificio-techo"></div>
+          <div class="politica-edificio-triangulo"></div>
+          <div class="politica-edificio-columnas">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="politica-edificio-base"></div>
+        </div>
+        <span class="politica-grafico-texto">MÉXICO</span>
+      </div>
+    </section>
+
+    <div class="politica-cinta">
+      <span class="politica-cinta-titulo">EN ESTA SECCIÓN</span>
+      <span>Gobierno</span>
+      <span>Congreso</span>
+      <span>Elecciones</span>
+      <span>Política nacional</span>
+    </div>
+
+    <section class="politica-noticias" id="politica-noticias">
+      <div class="politica-encabezado-seccion">
+        <div>
+          <span class="politica-etiqueta">INFORMACIÓN DE INTERÉS PÚBLICO</span>
+          <h2>Noticias de política</h2>
+          <p>Explora los temas, busca palabras clave o filtra por categoría.</p>
+        </div>
+        <span class="politica-numero-seccion">01 / POLÍTICA</span>
+      </div>
+
+      <div class="politica-herramientas">
+        <label class="politica-lector" for="politica-buscador">
+          Buscar noticias
+        </label>
+        <input
+          id="politica-buscador"
+          type="search"
+          placeholder="Buscar por tema, título o descripción..."
+        >
+
+        <label class="politica-lector" for="politica-filtro">
+          Filtrar noticias por categoría
+        </label>
+        <select id="politica-filtro">
+          <option value="Todas">Todas las categorías</option>
+        </select>
+      </div>
+
+      <div class="politica-resultados">
+        <span id="politica-contador" aria-live="polite">
+          Cargando información...
+        </span>
+        <button
+          id="politica-destacadas"
+          type="button"
+          aria-pressed="false"
+        >
+          ★ Solo destacadas
+        </button>
+      </div>
+
+      <div class="politica-grid" id="politica-lista" aria-live="polite"></div>
+
+      <div class="politica-aviso">
+        <span aria-hidden="true">i</span>
+        <p>
+          <strong>Nota editorial:</strong> las tarjetas iniciales son
+          contenido demostrativo para el prototipo; no representan
+          noticias verificadas ni declaraciones reales. Consulta los
+          enlaces a medios y organismos oficiales para información
+          actualizada.
+        </p>
+      </div>
+    </section>
+
+    <section class="politica-temas" id="politica-temas">
+      <div class="politica-encabezado-seccion">
+        <div>
+          <span class="politica-etiqueta">CONOCE LOS TEMAS</span>
+          <h2>Claves para entender la política</h2>
+        </div>
+      </div>
+
+      <div class="politica-temas-grid">
+        <article class="politica-tema">
+          <span class="politica-tema-numero">01</span>
+          <h3>Gobierno</h3>
+          <p>
+            Conoce las funciones del Poder Ejecutivo y las decisiones
+            que forman parte de la administración pública.
+          </p>
+        </article>
+
+        <article class="politica-tema">
+          <span class="politica-tema-numero">02</span>
+          <h3>Congreso</h3>
+          <p>
+            Comprende el trabajo legislativo, las iniciativas,
+            los debates y la aprobación de leyes.
+          </p>
+        </article>
+
+        <article class="politica-tema">
+          <span class="politica-tema-numero">03</span>
+          <h3>Elecciones</h3>
+          <p>
+            Consulta información sobre procesos electorales,
+            participación ciudadana y autoridades electorales.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="politica-fuentes" id="politica-fuentes">
+      <div>
+        <span class="politica-etiqueta">MÁS INFORMACIÓN</span>
+        <h2>Consulta las fuentes</h2>
+        <p>
+          Contrasta la información y revisa publicaciones originales
+          de medios de comunicación e instituciones.
+        </p>
+      </div>
+
+      <div class="politica-fuentes-lista">
+        <a
+          href="https://www.milenio.com/politica"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <strong>Milenio</strong>
+            <small>Noticias y actualidad política</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          href="https://www.diputados.gob.mx/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <strong>Cámara de Diputados</strong>
+            <small>Actividad legislativa federal</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          href="https://www.ine.mx/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <strong>Instituto Nacional Electoral</strong>
+            <small>Información electoral oficial</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="politica-footer">
+    <div class="politica-footer-interior">
+      <div>
+        <strong>PANORAMA</strong>
+        <p>Una mirada a la actualidad política de México.</p>
+      </div>
+      <a href="#politica-inicio">Volver al inicio ↑</a>
+    </div>
+    <p class="politica-footer-nota">
+      Proyecto académico · Sección de política
+    </p>
+  </footer>
+
+</body>
+</html>

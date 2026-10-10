@@ -1,0 +1,32 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#35164f"></rect>
+
+  <!-- Edificios de la ciudad -->
+  <path d="M7 54V30h13v24M23 54V21h18v33M44 54V34h13v20" fill="#f6a23a"></path>
+
+  <!-- Ventanas -->
+  <g fill="#fff2d8">
+    <rect x="11" y="35" width="5" height="6" rx="1"></rect>
+    <rect x="11" y="44" width="5" height="6" rx="1"></rect>
+    <rect x="28" y="27" width="5" height="6" rx="1"></rect>
+    <rect x="28" y="37" width="5" height="6" rx="1"></rect>
+    <rect x="28" y="46" width="5" height="5" rx="1"></rect>
+    <rect x="48" y="39" width="5" height="6" rx="1"></rect>
+    <rect x="48" y="47" width="5" height="5" rx="1"></rect>
+  </g>
+
+  <!-- Dulce de alfeñique -->
+  <path d="M32 5
+           C26 5 23 10 25 15
+           C20 19 24 25 30 24
+           L34 24
+           C40 25 44 19 39 15
+           C41 10 38 5 32 5Z" fill="#fff2d8"></path>
+
+  <circle cx="29" cy="14" r="1.5" fill="#35164f"></circle>
+  <circle cx="35" cy="14" r="1.5" fill="#35164f"></circle>
+  <path d="M29 19 Q32 22 35 19" fill="none" stroke="#d95b35" stroke-width="2" stroke-linecap="round"></path>
+
+  <rect x="5" y="56" width="54" height="3" rx="1.5" fill="#e85d3f"></rect>
+</svg>
