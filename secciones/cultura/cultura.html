@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultura & Vanguardia | Periódico Cultural</title>
+    <!-- Fuentes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="cultural.css">
+</head>
+<body>
+
+    <!-- Header / Encabezado Periodístico -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="date-location" id="current-date">Cargando fecha...</div>
+                <div class="top-actions">
+                    <button class="icon-btn" id="fav-counter-btn" title="Guardados">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <span class="badge" id="fav-badge">0</span>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" title="Cambiar Tema">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="brand-container container">
+            <span class="edition-tag">Edición Diario de Cultura y Arte</span>
+            <h1 class="brand-title">Cultura <span class="ampersand">&amp;</span> Vanguardia</h1>
+            <p class="brand-tagline">El pulso de las bellas artes, las letras y la escena contemporánea</p>
+        </div>
+
+        <!-- Navegación por Categorías -->
+        <nav class="nav-bar">
+            <div class="container nav-content">
+                <ul class="nav-tabs" id="category-tabs">
+                    <li class="tab active" data-category="todas">Todas</li>
+                    <li class="tab" data-category="arte">Arte Visual</li>
+                    <li class="tab" data-category="literatura">Literatura</li>
+                    <li class="tab" data-category="musica">Música</li>
+                    <li class="tab" data-category="cine">Cine y Teatro</li>
+                    <li class="tab" data-category="patrimonio">Patrimonio</li>
+                </ul>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Buscar noticias, autores, obras...">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content container">
+
+        <!-- Destacado Principal -->
+        <section class="hero-section" id="hero-section">
+            <div class="hero-card" id="hero-card">
+                <!-- Inyectado por Javascript -->
+            </div>
+        </section>
+
+        <!-- Layout de Grilla Principal + Sidebar -->
+        <div class="content-layout">
+
+            <!-- Columna Principal: Grilla de Noticias -->
+            <section class="news-column">
+                <div class="section-header">
+                    <h2 class="section-title" id="feed-title">Titulares Culturales</h2>
+                    <div class="filter-indicators">
+                        <button class="filter-chip hidden" id="favorites-filter-btn">
+                            Ver solo guardados <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="news-grid" id="news-grid">
+                    <!-- Noticias generadas dinámicamente -->
+                </div>
+                
+                <div class="empty-state hidden" id="empty-state">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <h3>No se encontraron artículos</h3>
+                    <p>Intenta con otra búsqueda o selecciona una categoría diferente.</p>
+                </div>
+            </section>
+
+            <!-- Barra Lateral Cultural -->
+            <aside class="sidebar-column">
+
+                <!-- Recomendación Cultural del Día -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-gem text-gold"></i>
+                        <span>Obra Recomendada del Día</span>
+                    </div>
+                    <div class="recommendation-box">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80" alt="Libro del día" class="rec-img">
+                        <div class="rec-details">
+                            <span class="category-tag">Literatura</span>
+                            <h4 class="rec-title">"El Laberinto de la Memoria"</h4>
+                            <p class="rec-author">Por Elena Rostova</p>
+                            <p class="rec-desc">Una profunda exploración sobre la nostalgia, el arte urbano y los paisajes cambiantes de Europa del Este.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda Cultural de la Semana -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <i class="fa-regular fa-calendar-days text-gold"></i>
+                        <span>Agenda Cultural</span>
+                    </div>
+                    <ul class="agenda-list">
+                        <li class="agenda-item">
+                            <div class="agenda-date">
+                                <span class="day">18</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="agenda-info">
+                                <h5>Noche de los Museos Abiertos</h5>
+                                <p><i class="fa-solid fa-location-dot"></i> Museo Central de Arte</p>
+                                <span class="time"><i class="fa-regular fa-clock"></i> 19:00 - 02:00</span>
+                            </div>
+                        </li>
+                        <li class="agenda-item">
+                            <div class="agenda-date">
+                                <span class="day">22</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="agenda-info">
+                                <h5>Sinfonía No. 9 de Beethoven</h5>
+                                <p><i class="fa-solid fa-location-dot"></i> Gran Filarmónica</p>
+                                <span class="time"><i class="fa-regular fa-clock"></i> 20:30</span>
+                            </div>
+                        </li>
+                        <li class="agenda-item">
+                            <div class="agenda-date">
+                                <span class="day">25</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="agenda-info">
+                                <h5>Feria Internacional del Libro</h5>
+                                <p><i class="fa-solid fa-location-dot"></i> Centro Cultural Pabellón</p>
+                                <span class="time"><i class="fa-regular fa-clock"></i> Todo el
