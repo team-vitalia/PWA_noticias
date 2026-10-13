@@ -3,180 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#003366">
-    <title>Comercio | Sistema de Noticias PWA</title>
+    <meta name="theme-color" content="#7b1e26">
+    <title>Comercio | Sistema de Noticias</title>
     <link rel="stylesheet" href="comercio.css">
     <link rel="icon" href="../../icons/icon-192.png">
 </head>
 <body>
 
     <header class="app-header">
-        <div class="header-content">
-            <a href="../../index.html" class="btn-back">← Inicio</a>
-            <div>
-                <h1>🌎 Comercio</h1>
-                <p class="subtitle">Sistema de Noticias PWA</p>
+        <div class="top-bar">
+            <span>Viernes, 10 de octubre de 2026</span>
+            <div class="top-bar-links">
+                <a href="../economia/economia.html">Economía</a>
+                <a href="../finanzas/finanzas.html">Finanzas</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-brand">
+                <div class="brand-titles">
+                    <h1>Comercio</h1>
+                    <p class="subtitle">Exportaciones, tratados y nearshoring</p>
+                </div>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="buscador" placeholder="Buscar noticias de comercio...">
             </div>
         </div>
     </header>
 
     <main class="app-content">
 
-        <section class="intro">
-            <h2>Comercio Internacional</h2>
-            <p>
-                El comercio internacional es uno de los pilares de la economía mexicana.
-                Con 14 tratados de libre comercio con más de 50 países, México es una
-                de las naciones más abiertas al mundo. Aquí encontrarás información sobre
-                exportaciones, importaciones, tratados comerciales y el impacto del
-                nearshoring en la economía nacional.
-            </p>
+        <article class="headline-news" data-titulo="exportaciones mexicanas record">
+            <div class="headline-visual">
+                <span class="headline-badge">Última hora</span>
+                <span class="headline-emoji"></span>
+            </div>
+            <div class="headline-body">
+                <span class="headline-cat">Exportaciones</span>
+                <h2>México rompe récord en exportaciones manufactureras</h2>
+                <p class="headline-lead">
+                    Las exportaciones mexicanas alcanzaron 55 mil millones de dólares en el
+                    último trimestre, impulsadas por los sectores automotriz, electrónico y
+                    aeroespacial, consolidando al país como una potencia exportadora mundial.
+                </p>
+                <div class="headline-meta">
+                    <span>Por Sebas Rodríguez</span>
+                    <span>10 oct 2026</span>
+                    <span>6 min lectura</span>
+                </div>
+            </div>
+        </article>
+
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Indicadores comerciales</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="indicadores-grid">
+                <div class="indicador-card">
+                    <span class="ind-icon">📦</span>
+                    <span class="ind-label">Exportaciones</span>
+                    <span class="ind-value">$55 MM</span>
+                    <span class="ind-period">USD trimestral</span>
+                    <div class="ind-chart" id="chart-export"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">🚢</span>
+                    <span class="ind-label">Importaciones</span>
+                    <span class="ind-value">$52 MM</span>
+                    <span class="ind-period">USD trimestral</span>
+                    <div class="ind-chart" id="chart-import"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">🤝</span>
+                    <span class="ind-label">Tratados</span>
+                    <span class="ind-value">14</span>
+                    <span class="ind-period">TLC vigentes</span>
+                    <div class="ind-chart" id="chart-tlc"></div>
+                </div>
+                <div class="indicador-card">
+                    <span class="ind-icon">🇺🇸</span>
+                    <span class="ind-label">Socio principal</span>
+                    <span class="ind-value">80%</span>
+                    <span class="ind-period">Exportaciones a EUA</span>
+                    <div class="ind-chart" id="chart-socio"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- INDICADORES COMERCIALES -->
-        <section class="indicadores-grid">
-            <div class="indicador-card">
-                <span class="icono">📦</span>
-                <span class="nombre">Exportaciones</span>
-                <span class="valor">$55 MM</span>
-                <span class="periodo">USD trimestral</span>
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Últimas noticias</h2>
+                <span class="section-line"></span>
             </div>
-
-            <div class="indicador-card">
-                <span class="icono">🚢</span>
-                <span class="nombre">Importaciones</span>
-                <span class="valor">$52 MM</span>
-                <span class="periodo">USD trimestral</span>
+            <div class="news-grid">
+                <article class="news-card" data-titulo="exportaciones manufactureras record">
+                    <div class="news-visual"><span>📦</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Exportaciones</span>
+                        <h3>México rompe récord en exportaciones manufactureras</h3>
+                        <p>Las exportaciones alcanzaron 55 mil millones de dólares, impulsadas por automotriz, electrónica y aeroespacial.</p>
+                        <span class="news-date">10 oct 2026 · 6 min</span>
+                    </div>
+                </article>
+                <article class="news-card" data-titulo="tmec comercio regional maximo">
+                    <div class="news-visual"><span>🤝</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">T-MEC</span>
+                        <h3>T-MEC impulsa el comercio regional a nuevos máximos</h3>
+                        <p>El tratado ha fortalecido las cadenas productivas de América del Norte con un incremento del 15%.</p>
+                        <span class="news-date">9 oct 2026 · 5 min</span>
+                    </div>
+                </article>
+                <article class="news-card" data-titulo="nearshoring 36 mil millones">
+                    <div class="news-visual"><span>🏭</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Nearshoring</span>
+                        <h3>Nearshoring atrae 36 mil millones USD de inversión</h3>
+                        <p>México se convierte en el destino preferido de empresas que acercan sus cadenas productivas.</p>
+                        <span class="news-date">8 oct 2026 · 7 min</span>
+                    </div>
+                </article>
+                <article class="news-card" data-titulo="puerto manzanillo contenedores">
+                    <div class="news-visual"><span>🚢</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Puertos</span>
+                        <h3>Puerto de Manzanillo supera los 3 millones de contenedores</h3>
+                        <p>El puerto más importante del Pacífico mexicano creció 8% en movimiento de contenedores.</p>
+                        <span class="news-date">7 oct 2026 · 4 min</span>
+                    </div>
+                </article>
+                <article class="news-card" data-titulo="industria automotriz exporta vehiculos">
+                    <div class="news-visual"><span>🚗</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Automotriz</span>
+                        <h3>Industria automotriz exporta 3 millones de vehículos</h3>
+                        <p>La industria automotriz mexicana alcanzó un nuevo récord con más de 3 millones de vehículos.</p>
+                        <span class="news-date">6 oct 2026 · 5 min</span>
+                    </div>
+                </article>
+                <article class="news-card" data-titulo="exportaciones agropecuarias aguacate tequila">
+                    <div class="news-visual"><span>🥑</span></div>
+                    <div class="news-body">
+                        <span class="news-cat">Agro</span>
+                        <h3>Exportaciones agropecuarias crecen 10% anual</h3>
+                        <p>Productos como aguacate, berries, tequila y cerveza lideraron las exportaciones agropecuarias.</p>
+                        <span class="news-date">5 oct 2026 · 5 min</span>
+                    </div>
+                </article>
             </div>
-
-            <div class="indicador-card">
-                <span class="icono">🤝</span>
-                <span class="nombre">Tratados</span>
-                <span class="valor">14</span>
-                <span class="periodo">TLC vigentes</span>
-            </div>
-
-            <div class="indicador-card">
-                <span class="icono">🇺🇸</span>
-                <span class="nombre">Socio principal</span>
-                <span class="valor">EUA</span>
-                <span class="periodo">80% exportaciones</span>
+            <div class="no-results" id="noResultsCom" style="display:none;">
+                <span>🔍</span>
+                <p>No se encontraron noticias con ese término.</p>
             </div>
         </section>
 
-        <!-- NOTICIAS DE COMERCIO -->
-        <section class="noticias-section">
-            <h2>📰 Noticias de Comercio</h2>
-
-            <article class="noticia-card">
-                <span class="categoria">Exportaciones</span>
-                <h3>México rompe récord en exportaciones manufactureras</h3>
-                <span class="fecha">10 de octubre, 2024</span>
-                <p>
-                    Las exportaciones mexicanas alcanzaron 55 mil millones de dólares en
-                    el último trimestre, impulsadas por el sector automotriz, electrónico
-                    y aeroespacial, consolidando a México como potencia exportadora.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">T-MEC</span>
-                <h3>T-MEC impulsa el comercio regional a nuevos máximos</h3>
-                <span class="fecha">9 de octubre, 2024</span>
-                <p>
-                    El Tratado entre México, Estados Unidos y Canadá (T-MEC) ha fortalecido
-                    las cadenas productivas de América del Norte, con un incremento del
-                    15% en el comercio intrarregional durante el último año.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Nearshoring</span>
-                <h3>Nearshoring atrae 36 mil millones USD de inversión</h3>
-                <span class="fecha">8 de octubre, 2024</span>
-                <p>
-                    El fenómeno del nearshoring ha convertido a México en el destino
-                    preferido de empresas que buscan acercar sus cadenas productivas
-                    a los mercados de América del Norte.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Puertos</span>
-                <h3>Puerto de Manzanillo supera los 3 millones de contenedores</h3>
-                <span class="fecha">7 de octubre, 2024</span>
-                <p>
-                    El puerto de Manzanillo se consolidó como el más importante del
-                    Pacífico mexicano, con un crecimiento del 8% en movimiento de
-                    contenedores durante el último año.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Automotriz</span>
-                <h3>Industria automotriz exporta 3 millones de vehículos</h3>
-                <span class="fecha">6 de octubre, 2024</span>
-                <p>
-                    La industria automotriz mexicana alcanzó un nuevo récord de exportación
-                    con más de 3 millones de vehículos enviados al extranjero, principalmente
-                    a Estados Unidos y Canadá.
-                </p>
-            </article>
-
-            <article class="noticia-card">
-                <span class="categoria">Agro</span>
-                <h3>Exportaciones agropecuarias crecen 10% anual</h3>
-                <span class="fecha">5 de octubre, 2024</span>
-                <p>
-                    Productos como aguacate, berries, tequila y cerveza lideraron las
-                    exportaciones agropecuarias mexicanas, que superaron los 50 mil
-                    millones de dólares anuales.
-                </p>
-            </article>
-        </section>
-
-        <!-- ANÁLISIS COMERCIAL -->
-        <section class="analisis-section">
-            <h2>📊 Análisis Comercial</h2>
-
-            <div class="analisis-box">
-                <h3>🌐 México: potencia exportadora mundial</h3>
-                <p>
-                    México es el décimo exportador mundial y el primer exportador de
-                    América Latina. Su ubicación estratégica, sus 14 tratados de libre
-                    comercio y su mano de obra calificada lo convierten en un socio
-                    comercial clave a nivel global.
-                </p>
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Análisis comercial</h2>
+                <span class="section-line"></span>
             </div>
-
-            <div class="analisis-box">
-                <h3>🏭 Cadenas globales de valor</h3>
-                <p>
-                    México se ha integrado exitosamente en las cadenas globales de valor,
-                    especialmente en los sectores automotriz, electrónico y aeroespacial.
-                    Más del 40% del valor de las exportaciones mexicanas proviene de
-                    insumos importados, reflejando su papel en el comercio internacional.
-                </p>
+            <div class="analisis-list">
+                <article class="analisis-item">
+                    <div class="analisis-num">01</div>
+                    <div class="analisis-body">
+                        <h3>México: potencia exportadora mundial</h3>
+                        <p>México es el décimo exportador mundial y el primer exportador de América Latina. Su ubicación estratégica y sus 14 tratados comerciales lo convierten en un socio clave global.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
+                <article class="analisis-item">
+                    <div class="analisis-num">02</div>
+                    <div class="analisis-body">
+                        <h3>Cadenas globales de valor</h3>
+                        <p>Más del 40% del valor de las exportaciones mexicanas proviene de insumos importados, reflejando su papel estratégico en el comercio internacional.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
+                <article class="analisis-item">
+                    <div class="analisis-num">03</div>
+                    <div class="analisis-body">
+                        <h3>Retos del comercio mexicano</h3>
+                        <p>El comercio mexicano enfrenta retos como la dependencia del mercado estadounidense, la diversificación de socios y la modernización de infraestructura portuaria.</p>
+                        <span class="analisis-author">— Análisis editorial</span>
+                    </div>
+                </article>
             </div>
-
-            <div class="analisis-box">
-                <h3>⚠️ Retos del comercio mexicano</h3>
-                <p>
-                    A pesar de los logros, el comercio mexicano enfrenta retos como la
-                    dependencia excesiva del mercado estadounidense, la necesidad de
-                    diversificar socios comerciales, la modernización de infraestructura
-                    portuaria y la simplificación aduanera.
-                </p>
-            </div>
-
         </section>
 
     </main>
 
-    <footer class="app-footer">
-        <p>&copy; 2024 Sistema de Noticias PWA · Sección Comercio</p>
-        <p class="footer-small">Desarrollado por Sebas · UTXT</p>
-    </footer>
+
 
     <script src="comercio.js"></script>
 </body>
