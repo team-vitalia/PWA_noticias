@@ -1,26 +1,32 @@
+
 /**
  * NewsApp PWA - Cliente Principal (app.js)
- * Manejo multi-página (index.html y secciones/api.html)
+ * API de noticias: GNews
  * 1. Registro del Service Worker
- * 2. Consumo de la API de Mediastack
- * 3. Inyección dinámica en el App Shell
- * 4. Gestión de Notificaciones Web Nativas
+ * 2. Consumo de GNews API
+ * 3. Inyección dinámica de noticias
+ * 4. Gestión de notificaciones web nativas
+ * 5. Caché local para reducir solicitudes
  */
 
 // ==========================================================
 // 1. CONFIGURACIÓN Y CONSTANTES
 // ==========================================================
-const API_KEY = '715ff4974f372006ec47f6a45f4dccb6';
-const API_BASE_URL = 'http://api.mediastack.com/v1/news';
 
-// Determinación dinámica de rutas relativas (si está en la raíz o en /secciones/)
+const API_KEY = '9fcb66c58020dc46277065d1e63a6038';
+const API_BASE_URL = 'https://gnews.io/api/v4/top-headlines';
+
+const CACHE_TIME = 15 * 60 * 1000; // 15 minutos
+const REQUEST_COOLDOWN = 5000; // 5 segundos entre solicitudes
+
 const isSubfolder = window.location.pathname.includes('/secciones/');
 const basePath = isSubfolder ? '../' : './';
 
 let currentCategory = 'general';
 let swRegistration = null;
+let activeRequest = null;
+let lastRequestTime = 0;
 
-// Elementos del DOM del App Shell
 const newsContainer = document.getElementById('news-container');
 const newsCount = document.getElementById('news-count');
 const sectionTitle = document.getElementById('section-title');
@@ -30,43 +36,43 @@ const navPills = document.querySelectorAll('.nav-pill');
 const offlineBanner = document.getElementById('offline-banner');
 const swStatus = document.getElementById('sw-status');
 
-// Imagen SVG de reserva (Fallback) cuando la noticia no provee imagen
-const FALLBACK_IMAGE = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect fill='%231e293b' width='400' height='220'/%3E%3Ctext fill='%2394a3b8' font-family='sans-serif' font-size='20' font-weight='bold' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3ENewsApp PWA%3C/text%3E%3C/svg%3E";
+const FALLBACK_IMAGE =
+  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect fill='%231e293b' width='400' height='220'/%3E%3Ctext fill='%2394a3b8' font-family='sans-serif' font-size='20' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3ENewsApp PWA%3C/text%3E%3C/svg%3E";
 
 // ==========================================================
-// 2. REGISTRO DEL SERVICE WORKER
+// 2. SERVICE WORKER
 // ==========================================================
+
 async function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    try {
-      const swFile = `${basePath}sw.js`;
-      const swScope = basePath;
-
-      const registration = await navigator.serviceWorker.register(swFile, { scope: swScope });
-      swRegistration = registration;
-      
-      console.log('[App] Service Worker registrado con éxito en scope:', registration.scope);
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            console.log('[App] Nueva versión de NewsApp lista.');
-          }
-        };
-      };
-    } catch (error) {
-      console.error('[App] Error al registrar el Service Worker:', error);
-    }
-  } else {
-    console.warn('[App] Service Workers no soportados en este navegador.');
+  if (!('serviceWorker' in navigator)) {
     if (swStatus) {
       swStatus.textContent = 'Service Worker: No soportado';
     }
+    return;
+  }
+
+  try {
+    const registration = await navigator.serviceWorker.register(
+      `${basePath}sw.js`,
+      { scope: basePath }
+    );
+
+    swRegistration = registration;
+
+    console.log(
+      '[App] Service Worker registrado:',
+      registration.scope
+    );
+  } catch (error) {
+    console.error(
+      '[App] Error al registrar Service Worker:',
+      error
+    );
   }
 }
 
 // ==========================================================
-// 3. GESTIÓN DE NOTIFICACIONES NATIVAS
+// 3. NOTIFICACIONES NATIVAS
 // ==========================================================
 
 function updateNotificationButtonUI() {
@@ -79,20 +85,29 @@ function updateNotificationButtonUI() {
 
   if (Notification.permission === 'granted') {
     btnNotify.classList.add('granted');
-    btnNotify.innerHTML = '<span class="icon"><i class="fa-solid fa-bell"></i></span><span class="btn-text">Notificaciones Activas</span>';
+    btnNotify.classList.remove('denied');
+    btnNotify.innerHTML =
+      '<span class="icon"><i class="fa-solid fa-bell"></i></span>' +
+      '<span class="btn-text">Notificaciones Activas</span>';
   } else if (Notification.permission === 'denied') {
     btnNotify.classList.add('denied');
-    btnNotify.innerHTML = '<span class="icon"><i class="fa-solid fa-bell-slash"></i></span><span class="btn-text">Notificaciones Bloqueadas</span>';
+    btnNotify.classList.remove('granted');
+    btnNotify.innerHTML =
+      '<span class="icon"><i class="fa-solid fa-bell-slash"></i></span>' +
+      '<span class="btn-text">Notificaciones Bloqueadas</span>';
     btnNotify.disabled = true;
   } else {
     btnNotify.classList.remove('granted', 'denied');
-    btnNotify.innerHTML = '<span class="icon"><i class="fa-solid fa-bell"></i></span><span class="btn-text">Activar Notificaciones</span>';
+    btnNotify.disabled = false;
+    btnNotify.innerHTML =
+      '<span class="icon"><i class="fa-solid fa-bell"></i></span>' +
+      '<span class="btn-text">Notificaciones</span>';
   }
 }
 
 async function requestNotificationPermission() {
   if (!('Notification' in window)) {
-    alert('Tu navegador no soporta la API nativa de Notificaciones Web.');
+    alert('Tu navegador no soporta las notificaciones web.');
     return;
   }
 
@@ -101,215 +116,446 @@ async function requestNotificationPermission() {
     updateNotificationButtonUI();
 
     if (permission === 'granted') {
-      console.log('[App] Permiso de notificaciones otorgado.');
-      showNativeNotification(
-        '¡Notificaciones Activadas!',
-        'Ahora recibirás alertas nativas en NewsApp cada vez que se actualicen las noticias.'
+      await showNativeNotification(
+        '¡Notificaciones activadas!',
+        'NewsApp ya puede mostrarte notificaciones.'
       );
-    } else if (permission === 'denied') {
-      console.warn('[App] El usuario denegó las notificaciones.');
     }
   } catch (error) {
-    console.error('[App] Error al solicitar permiso de notificaciones:', error);
+    console.error(
+      '[App] Error al solicitar notificaciones:',
+      error
+    );
   }
 }
 
-/**
- * Emite una notificación web nativa utilizando el icono noticias-192.png
- */
 async function showNativeNotification(title, bodyText, count = null) {
-  if (!('Notification' in window) || Notification.permission !== 'granted') {
+  if (
+    !('Notification' in window) ||
+    Notification.permission !== 'granted'
+  ) {
     return;
   }
 
-  // URL absoluta y canónica del icono noticias-192.png
-  const iconUrl = new URL(`${basePath}icons/noticias-192.png`, window.location.href).href;
+  const iconUrl = new URL(
+    `${basePath}icons/noticias-192.png`,
+    window.location.href
+  ).href;
 
-  const notificationOptions = {
+  const options = {
     body: bodyText,
     icon: iconUrl,
     badge: iconUrl,
     tag: 'newsapp-update',
-    renotify: true,
-    vibrate: [150, 50, 100],
     data: {
       dateOfArrival: Date.now(),
       category: currentCategory,
-      count: count
+      count
     }
   };
 
   try {
-    if (swRegistration && 'showNotification' in swRegistration) {
-      await swRegistration.showNotification(title, notificationOptions);
+    if (swRegistration) {
+      await swRegistration.showNotification(title, options);
     } else {
-      new Notification(title, notificationOptions);
+      new Notification(title, options);
     }
-    console.log('[App] Notificación nativa disparada:', title);
-  } catch (err) {
-    console.error('[App] Error al disparar notificación nativa:', err);
+  } catch (error) {
+    console.error('[App] Error en notificación:', error);
   }
 }
 
 // ==========================================================
-// 4. CONSUMO DE LA API DE MEDIASTACK (SECCIÓN API)
+// 4. CACHÉ LOCAL
 // ==========================================================
 
-async function fetchNews(category = 'general') {
+function getCachedNews(category) {
+  try {
+    const value = localStorage.getItem(`newsapp_gnews_${category}`);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    console.warn('[App] No se pudo leer la caché:', error);
+    return null;
+  }
+}
+
+function saveCachedNews(category, articles) {
+  try {
+    localStorage.setItem(
+      `newsapp_gnews_${category}`,
+      JSON.stringify({
+        articles,
+        savedAt: Date.now()
+      })
+    );
+  } catch (error) {
+    console.warn('[App] No se pudo guardar la caché:', error);
+  }
+}
+
+// ==========================================================
+// 5. CONSUMO DE GNEWS API
+// ==========================================================
+
+
+
+async function fetchNews(category = 'general', force = false, notifyUpdate = true) {
   if (!newsContainer) return;
 
-  showLoadingState();
+  const cached = getCachedNews(category);
+  const validCache = cached && Array.isArray(cached.articles);
 
-  const params = new URLSearchParams({
-    access_key: API_KEY,
-    languages: 'es',
-    categories: category,
-    limit: '12'
-  });
+  if (!force && validCache && Date.now() - cached.savedAt < CACHE_TIME) {
+    renderNews(cached.articles);
+    return;
+  }
 
-  const requestUrl = `${API_BASE_URL}?${params.toString()}`;
+  if (activeRequest) {
+    if (activeRequest.category === category) {
+      return activeRequest.promise;
+    }
+
+    // No iniciar otra petición mientras haya una en curso.
+    await activeRequest.promise;
+  }
+
+  if (!force && Date.now() - lastRequestTime < REQUEST_COOLDOWN) {
+    if (validCache) {
+      renderNews(cached.articles);
+    } else {
+      showErrorState('Espera unos segundos antes de volver a consultar.');
+    }
+    return;
+  }
+
+  const promise = (async () => {
+    showLoadingState();
+
+    const params = new URLSearchParams({
+      apikey: API_KEY,
+      category,
+      lang: 'es',
+      country: 'mx',
+      max: '10'
+    });
+
+    // Parámetro único para evitar reutilizar una respuesta HTTP almacenada.
+    params.set('_refresh', String(Date.now()));
+
+    try {
+      lastRequestTime = Date.now();
+
+      console.log('[NewsApp] Solicitando noticias:', category);
+
+      const response = await fetch(
+        `${API_BASE_URL}?${params.toString()}`,
+        {
+          method: 'GET',
+          cache: 'no-store'
+        }
+      );
+
+      const data = await response.json();
+
+      console.log('[NewsApp] Estado HTTP:', response.status);
+      console.log('[NewsApp] Respuesta GNews:', data);
+
+      if (!response.ok || data.errors) {
+        const detail = Array.isArray(data.errors)
+          ? data.errors.join(', ')
+          : data.errors
+            ? String(data.errors)
+            : data.message || `Error HTTP ${response.status}`;
+
+        throw new Error(detail);
+      }
+
+      if (!Array.isArray(data.articles)) {
+        throw new Error('GNews no devolvió una lista válida de noticias.');
+      }
+
+      const articles = data.articles;
+
+      renderNews(articles);
+      saveCachedNews(category, articles);
+
+      if (newsCount) {
+        newsCount.textContent = `${articles.length} noticias · Actualizadas ahora`;
+      }
+
+      if (notifyUpdate && articles.length > 0) {
+        await showNativeNotification(
+          `Noticias de ${getCategoryName(category)}`,
+          `Se consultaron ${articles.length} noticias en GNews.`,
+          articles.length
+        );
+      }
+    } catch (error) {
+      console.error('[NewsApp] Error al actualizar:', error);
+
+      if (validCache) {
+        renderNews(cached.articles);
+
+        if (newsCount) {
+          newsCount.textContent =
+            `${cached.articles.length} noticias · Mostrando caché`;
+        }
+      } else {
+        showErrorState(
+          !navigator.onLine
+            ? 'No hay conexión a Internet.'
+            : error.message || 'No fue posible consultar GNews.'
+        );
+      }
+    }
+  })();
+
+  activeRequest = { category, promise };
 
   try {
-    console.log(`[App] Consultando Mediastack para categoría [${category}]...`);
-    const response = await fetch(requestUrl);
-
-    if (!response.ok) {
-      throw new Error(`Error en el servidor: HTTP ${response.status}`);
+    await promise;
+  } finally {
+    if (activeRequest?.promise === promise) {
+      activeRequest = null;
     }
-
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(`Mediastack: ${data.error.message || data.error.code}`);
-    }
-
-    const articles = data.data || [];
-    renderNews(articles);
-
-    // ==========================================================
-    // REQUISITO: Notificación nativa funcional al cargar noticias
-    // ==========================================================
-    if (articles.length > 0) {
-      const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-      showNativeNotification(
-        '¡Noticias Actualizadas!',
-        `Se han cargado ${articles.length} noticias en la categoría "${categoryName}".`,
-        articles.length
-      );
-    }
-
-  } catch (error) {
-    console.error('[App] Error al obtener noticias:', error);
-    showErrorState(error.message);
   }
 }
 
+function getCategoryName(category) {
+  const names = {
+    general: 'General',
+    world: 'Internacionales',
+    nation: 'Nacionales',
+    business: 'Negocios',
+    technology: 'Tecnología',
+    sports: 'Deportes',
+    entertainment: 'Entretenimiento',
+    science: 'Ciencia',
+    health: 'Salud'
+  };
+
+  return names[category] || category;
+}
+
 // ==========================================================
-// 5. INYECCIÓN DINÁMICA DE CONTENIDO EN EL APP SHELL
+// 6. ESTADOS DE CARGA Y ERROR
 // ==========================================================
 
 function showLoadingState() {
-  if (newsCount) newsCount.textContent = 'Cargando...';
+  if (newsCount) {
+    newsCount.textContent = 'Cargando...';
+  }
+
   if (newsContainer) {
     newsContainer.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p>Consultando la API de Mediastack en vivo...</p>
+        <p>Consultando noticias de GNews...</p>
       </div>
     `;
   }
 }
 
-function showErrorState(errorMessage) {
-  if (newsCount) newsCount.textContent = '0 noticias';
+function showErrorState(message) {
+  if (newsCount) {
+    newsCount.textContent = 'No disponible';
+  }
+
   if (newsContainer) {
-    newsContainer.innerHTML = `
-      <div class="error-card">
-        <span class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-        <h3>No se pudieron cargar las noticias</h3>
-        <p class="error-details">${errorMessage}</p>
-        <button class="btn btn-secondary" onclick="fetchNews('${currentCategory}')">
-          <i class="fa-solid fa-arrows-rotate"></i> Reintentar conexión
-        </button>
-      </div>
-    `;
+    const card = document.createElement('div');
+    card.className = 'error-card';
+
+    const title = document.createElement('h3');
+    title.textContent = 'No se pudieron cargar las noticias';
+
+    const detail = document.createElement('p');
+    detail.className = 'error-details';
+    detail.textContent = message;
+
+    const button = document.createElement('button');
+    button.className = 'btn btn-secondary';
+    button.innerHTML =
+      '<i class="fa-solid fa-arrows-rotate"></i> Reintentar conexión';
+
+    button.addEventListener('click', () => {
+      fetchNews(currentCategory, true);
+    });
+
+    card.append(title, detail, button);
+    newsContainer.replaceChildren(card);
   }
 }
+
+// ==========================================================
+// 7. MOSTRAR NOTICIAS
+// ==========================================================
+
 
 function renderNews(articles) {
   if (!newsContainer) return;
 
-  if (!articles || articles.length === 0) {
-    if (newsCount) newsCount.textContent = '0 noticias';
+  newsContainer.replaceChildren();
+
+  if (!Array.isArray(articles) || articles.length === 0) {
     newsContainer.innerHTML = `
       <div class="empty-state">
-        <span class="empty-icon"><i class="fa-solid fa-folder-open"></i></span>
-        <h3>No se encontraron noticias en esta categoría</h3>
-        <p>Prueba seleccionando otra sección en el menú de categorías.</p>
+        <i class="fa-regular fa-newspaper"
+           style="font-size: 32px; margin-bottom: 12px;"></i>
+        <h3>No hay noticias disponibles</h3>
+        <p>Intenta seleccionar otra categoría o actualizar las noticias.</p>
       </div>
     `;
+
+    if (newsCount) newsCount.textContent = "0 noticias";
     return;
   }
 
-  if (newsCount) newsCount.textContent = `${articles.length} noticias disponibles`;
-  newsContainer.innerHTML = '';
+  const fragment = document.createDocumentFragment();
 
-  articles.forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'news-card';
+  articles.forEach((article) => {
+    const card = document.createElement("article");
+    card.className = "news-card";
 
-    const dateFormatted = item.published_at 
-      ? new Date(item.published_at).toLocaleDateString('es-ES', {
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      : 'Fecha reciente';
+    const title = article.title || "Noticia sin título";
+    const description =
+      article.description || "No hay una descripción disponible para esta noticia.";
+    const source =
+      typeof article.source === "object"
+        ? article.source?.name
+        : article.source;
 
-    const imageUrl = item.image ? item.image : FALLBACK_IMAGE;
+    const publishedAt = article.publishedAt
+      ? new Date(article.publishedAt)
+      : null;
 
-    card.innerHTML = `
-      <div class="card-image-wrap">
-        <img 
-          src="${imageUrl}" 
-          alt="${escapeHtml(item.title || 'Noticia')}" 
-          class="card-image"
-          loading="lazy"
-          onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}';"
-        >
-        <span class="card-badge">${escapeHtml(item.category || currentCategory)}</span>
-      </div>
-      <div class="card-content">
-        <div class="card-meta">
-          <span class="card-source">${escapeHtml(item.source || 'Fuente general')}</span>
-          <span class="card-date">${dateFormatted}</span>
-        </div>
-        <h3 class="card-title">
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer">
-            ${escapeHtml(item.title || 'Sin título disponible')}
-          </a>
-        </h3>
-        <p class="card-description">
-          ${escapeHtml(item.description || 'Haga clic en el enlace para leer la noticia completa en la fuente.')}
-        </p>
-        <div class="card-footer">
-          <span class="card-author">${item.author ? `Por: ${escapeHtml(item.author)}` : 'Redacción'}</span>
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="card-link">
-            Leer noticia <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    `;
+    const dateText =
+      publishedAt && !Number.isNaN(publishedAt.getTime())
+        ? publishedAt.toLocaleString("es-MX", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          })
+        : "Fecha no disponible";
 
-    newsContainer.appendChild(card);
+    const imageUrl = article.image || "";
+
+    // Imagen de la noticia
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "news-image-wrapper";
+
+    if (imageUrl) {
+      const image = document.createElement("img");
+      image.src = imageUrl;
+      image.alt = title;
+      image.loading = "lazy";
+      image.referrerPolicy = "no-referrer";
+
+      image.addEventListener("error", () => {
+        image.remove();
+        imageWrapper.classList.add("no-image");
+        imageWrapper.innerHTML =
+          '<i class="fa-regular fa-newspaper" aria-hidden="true"></i>';
+      }, { once: true });
+
+      imageWrapper.appendChild(image);
+    } else {
+      imageWrapper.classList.add("no-image");
+      imageWrapper.innerHTML =
+        '<i class="fa-regular fa-newspaper" aria-hidden="true"></i>';
+    }
+
+    // Información de la tarjeta
+    const content = document.createElement("div");
+    content.className = "news-card-content";
+
+    const metadata = document.createElement("div");
+    metadata.className = "news-meta";
+
+    const categoryBadge = document.createElement("span");
+    categoryBadge.className = "news-category";
+    categoryBadge.textContent =
+      currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
+
+    const date = document.createElement("time");
+    date.className = "news-date";
+    date.textContent = dateText;
+
+    if (publishedAt && !Number.isNaN(publishedAt.getTime())) {
+      date.dateTime = publishedAt.toISOString();
+    }
+
+    metadata.append(categoryBadge, date);
+
+    const heading = document.createElement("h3");
+    heading.className = "news-title";
+    heading.textContent = title;
+
+    const summary = document.createElement("p");
+    summary.className = "news-description";
+    summary.textContent = description;
+
+    const footer = document.createElement("div");
+    footer.className = "news-card-footer";
+
+    const sourceName = document.createElement("span");
+    sourceName.className = "news-source";
+    sourceName.innerHTML = '<i class="fa-regular fa-newspaper"></i> ';
+    sourceName.appendChild(document.createTextNode(source || "Fuente desconocida"));
+
+    const link = document.createElement("a");
+    link.className = "news-read-more";
+    link.textContent = "Leer noticia";
+    link.appendChild(document.createTextNode(" "));
+    link.insertAdjacentHTML(
+      "beforeend",
+      '<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>'
+    );
+
+    const safeUrl = safeArticleUrl(article.url);
+
+    if (safeUrl) {
+      link.href = safeUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    } else {
+      link.removeAttribute("href");
+      link.setAttribute("aria-disabled", "true");
+      link.style.opacity = "0.5";
+      link.style.pointerEvents = "none";
+    }
+
+    footer.append(sourceName, link);
+    content.append(metadata, heading, summary, footer);
+    card.append(imageWrapper, content);
+    fragment.appendChild(card);
   });
+
+  newsContainer.appendChild(fragment);
+
+  if (newsCount) {
+    newsCount.textContent =
+      `${articles.length} ${articles.length === 1 ? "noticia" : "noticias"}`;
+  }
 }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str)
+function safeArticleUrl(value) {
+  try {
+    const url = new URL(value);
+
+    if (url.protocol === 'https:' || url.protocol === 'http:') {
+      return url.href;
+    }
+  } catch (error) {
+    console.warn('[App] URL de noticia no válida.');
+  }
+
+  return 'https://news.google.com/';
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -318,41 +564,69 @@ function escapeHtml(str) {
 }
 
 // ==========================================================
-// 6. EVENT LISTENERS E INICIALIZACIÓN
+// 8. EVENTOS E INICIALIZACIÓN
 // ==========================================================
 
 window.addEventListener('online', () => {
-  if (offlineBanner) offlineBanner.classList.add('hidden');
+  if (offlineBanner) {
+    offlineBanner.classList.add('hidden');
+  }
 });
 
 window.addEventListener('offline', () => {
-  if (offlineBanner) offlineBanner.classList.remove('hidden');
+  if (offlineBanner) {
+    offlineBanner.classList.remove('hidden');
+  }
 });
 
+
 if (btnNotify) {
-  btnNotify.addEventListener('click', () => {
-    requestNotificationPermission();
-  });
+  btnNotify.addEventListener('click', requestNotificationPermission);
 }
 
 if (btnRefresh) {
-  btnRefresh.addEventListener('click', () => {
-    fetchNews(currentCategory);
+  btnRefresh.addEventListener('click', async () => {
+    btnRefresh.disabled = true;
+
+    try {
+      await fetchNews(currentCategory, true, true);
+    } finally {
+      btnRefresh.disabled = false;
+    }
   });
 }
 
-if (navPills.length > 0) {
-  navPills.forEach((pill) => {
-    pill.addEventListener('click', () => {
-      navPills.forEach((p) => p.classList.remove('active'));
-      pill.classList.add('active');
+navPills.forEach((pill) => {
+  pill.addEventListener('click', async () => {
+    const category = pill.dataset.category || 'general';
 
-      currentCategory = pill.dataset.category;
-      if (sectionTitle) sectionTitle.textContent = `Noticias de ${pill.textContent}`;
-      fetchNews(currentCategory);
+    if (category === currentCategory) return;
+
+    currentCategory = category;
+
+    navPills.forEach((element) => {
+      const selected = element === pill;
+
+      element.classList.toggle('active', selected);
+      element.setAttribute('aria-pressed', String(selected));
     });
+
+    const categoryName = getCategoryName(category);
+
+    if (sectionTitle) {
+      sectionTitle.textContent = `Noticias de ${categoryName}`;
+    }
+
+    // Consultar la categoría nueva ignorando la caché local.
+    await fetchNews(category, true, false);
+
+    // Avisar del cambio de sección si los permisos están habilitados.
+    await showNativeNotification(
+      'NewsApp · Cambio de sección',
+      `Ahora estás consultando noticias de ${categoryName}.`
+    );
   });
-}
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!navigator.onLine && offlineBanner) {
@@ -362,7 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
   registerServiceWorker();
   updateNotificationButtonUI();
 
-  // Si estamos en la página que contiene el contenedor de noticias (secciones/api.html), cargamos las noticias
   if (newsContainer) {
     fetchNews(currentCategory);
   }
